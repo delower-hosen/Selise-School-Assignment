@@ -1,51 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-            <section class="container content-section">
-            <h2 id="section-header"></h2>
-            <div class="shop-items">
-                <div class="shop-item">
-                    <span class="shop-item-title">Album 1</span>
-                    <img class="shop-item-image" src="Images/Album 1.png">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$12.99</span>
-                        <button class="btn btn-primary shop-item-button"  type="button">ADD TO CART</button>
-                    </div>
-                </div>
-                <div class="shop-item">
-                    <span class="shop-item-title">Album 2</span>
-                    <img class="shop-item-image" src="Images/Album 2.png">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$14.99</span>
-                        <button class="btn btn-primary shop-item-button"type="button">ADD TO CART</button>
-                    </div>
-                </div>
-                <div class="shop-item">
-                    <span class="shop-item-title">Album 3</span>
-                    <img class="shop-item-image" src="Images/Album 3.png">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$9.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                    </div>
-                </div>
-                <div class="shop-item">
-                    <span class="shop-item-title">Album 4</span>
-                    <img class="shop-item-image" src="Images/Album 4.png">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$19.99</span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                    </div>
+    <section class="container">
+        <div class="nav">
+            <span class="abc">Quantity: <span id="section-header"> </span> </span>
+            <button id="clear" class="btnn btnn-primary btn-primary shop-item-button" type="button">Clear All</button>
+        </div>
+        <div class="shop-items">
+            <div class="shop-item">
+                <span class="shop-item-title">The Noonday Demon</span>
+                <img class="shop-item-image" src="./Images/NoonDayDemon.jpg">
+                <div class="shop-item-details">
+                    <span  class="shop-item-price">$14.8</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                 </div>
             </div>
-        </section>
+            <div class="shop-item">
+                <span class="shop-item-title">No Country For Old Men</span>
+                <img class="shop-item-image" src="./Images/NoCountry.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$14.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">যদ্যপি আমার গুরু</span>
+                <img class="shop-item-image" src="./Images/jaddaypi-amar-guru-ahmed-sofa.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$9.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">হাত বাড়িয়ে দাও</span>
+                <img class="shop-item-image" src="./Images/hatbariyedao.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$19.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">Letter To a Child Never Born</span>
+                <img class="shop-item-image" src="./Images/LetterToAChild.jpg">
+                <div class="shop-item-details">
+                    <span  class="shop-item-price">$14.8</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">To Kill a Mocking Bird</span>
+                <img class="shop-item-image" src="./Images/MockingBirt.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$14.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">সাঁতারু ও জলকন্যা</span>
+                <img class="shop-item-image" src="./Images/Saturu.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$9.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">The Ninth Gate</span>
+                <img class="shop-item-image" src="./Images/ninthgate.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$19.99</span>
+                    <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="./main.js"></script>
 </body>
+
 </html>
