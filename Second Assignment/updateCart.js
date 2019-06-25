@@ -1,19 +1,20 @@
-var removeCartItemButtons = document.getElementsByClassName('btn-danger')
+var removeCartItemButtons = document.getElementsByClassName('btn-danger');
 for (var i = 0; i < removeCartItemButtons.length; i++) {
     var button = removeCartItemButtons[i]
     button.addEventListener('click', removeCartItem)
 }
 
 function removeCartItem(event) {
-    var buttonClicked = event.target
-    buttonClicked.parentElement.parentElement.remove()
-    updateCartTotal()
+    var buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    updateCartTotal();
 }
 
+// event.target.parentElement.parentElement.getElementsByClassName('cart-item-title')[0].innerText
 var quantityInputs = document.getElementsByClassName('cart-quantity-input')
 for (var i = 0; i < quantityInputs.length; i++) {
-    var input = quantityInputs[i]
-    input.addEventListener('change', quantityChanged)
+    var input = quantityInputs[i];
+    input.addEventListener('change', quantityChanged);
 }
 
 function quantityChanged(event) {

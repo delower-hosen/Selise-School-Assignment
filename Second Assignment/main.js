@@ -1,4 +1,5 @@
 window.onload = function(){
+    addItemToCart();
     var addedToCartButton = document.getElementsByClassName('shop-item-button');
     for(let index = 0; index < addedToCartButton.length; index++){
         addedToCartButton[index].addEventListener('click', addedToCartButtonClicked);
