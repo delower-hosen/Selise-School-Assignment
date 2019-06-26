@@ -31,17 +31,18 @@ function addItemToCart(title, price, imageSrc) {
     let storeLength = myCurrentStore? myCurrentStore.length : 0;
 
     if(!title && !price && !imageSrc){
-        start = myCurrentStore? myCurrentStore.length : 1;
+        start = 0;
     }
     else if(title && price && imageSrc){
         start = storeLength-1;
     }
-    debugger;
+    // debugger;
 
-    for(let i = start; i <= storeLength; i++){
+    for(let i = start; i < storeLength; i++){
             price = myCurrentStore[i].price;
             title = myCurrentStore[i].title;
             imageSrc = myCurrentStore[i].imageSrc;
+            quantity = myCurrentStore[i].quantity;
             // localStorage.setItem(key, JSON.stringify(myCurrentStore));
 
     var cartRow = document.createElement('div')
@@ -55,7 +56,7 @@ function addItemToCart(title, price, imageSrc) {
         </div>
         <span class="cart-price cart-column">${price}</span>
         <div class="cart-quantity cart-column">
-            <input class="cart-quantity-input" type="number" value="1">
+            <input class="cart-quantity-input" type="number" value="${quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
 
