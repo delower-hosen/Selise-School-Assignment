@@ -1,32 +1,9 @@
 function addItemToCart(title, price, imageSrc) {
     // debugger;
-    let key = 'myStore';
-    if(title && price && imageSrc){
-    var obj = {
-        title: title,
-        price: price,
-        imageSrc: imageSrc,
-        quantity: 1,
-        purchased: false
-    }
-    myLocalStorage = [];
-    if(localStorage.getItem(key)){
-        myLocalStorage = JSON.parse(localStorage.getItem(key));
-    }
+    isAlreadyAdded = addItemOnLocalStorage(title, price, imageSrc);
+    if(isAlreadyAdded) return;
 
-
-    for(let item = 0; item < myLocalStorage.length; item++){
-        if(myLocalStorage[item].title == title){
-            alert('This item is already added to the cart')
-            return
-        }
-    }
-
-    myLocalStorage.push(obj);
-    localStorage.setItem(key, JSON.stringify(myLocalStorage));
-}
-
-    myCurrentStore = JSON.parse(localStorage.getItem(key));
+    myCurrentStore = getCurrentCart(key);
     let start;
     let storeLength = myCurrentStore? myCurrentStore.length : 0;
 

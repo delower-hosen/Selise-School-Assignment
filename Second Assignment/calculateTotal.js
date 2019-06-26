@@ -1,6 +1,6 @@
 function updateCartTotal(){
     let total = 0;
-    debugger;
+    // debugger;
     myLocalStore = JSON.parse(localStorage.getItem('myStore'));
     let len = myLocalStore? myLocalStore.length : 0;
     for(let item = 0; item < len; item++){
