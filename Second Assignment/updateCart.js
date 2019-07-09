@@ -18,7 +18,6 @@ function removeCartItem(event) {
     updateCartTotal();
 }
 
-// event.target.parentElement.parentElement.getElementsByClassName('cart-item-title')[0].innerText
 var quantityInputs = document.getElementsByClassName('cart-quantity-input')
 for (var i = 0; i < quantityInputs.length; i++) {
     var input = quantityInputs[i];
