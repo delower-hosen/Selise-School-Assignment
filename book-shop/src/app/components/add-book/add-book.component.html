@@ -1,0 +1,52 @@
+<div  fxFlexAlign="center start" fxLayout="column">
+  <mat-card class="card" fxFlexAlign="center">
+      <mat-card-header>
+          <mat-card-title>Add Book</mat-card-title>
+          <mat-card-subtitle>Add a new book item here</mat-card-subtitle>
+      </mat-card-header>
+      <form [formGroup]="formAddBook">
+        <div fxLayout="column">
+
+          <div fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Book Name</mat-label>
+              <input matInput name="bookName" [(ngModel)]="bookInfo.bookName" formControlName="BookName" required>
+            </mat-form-field>
+            <p *ngIf="getFormErrors.BookName.touched && getFormErrors.BookName.invalid">Book Name is required</p>
+          </div>
+
+          <div fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Author Name</mat-label>
+              <input matInput name="authorName" [(ngModel)]="bookInfo.authorName"  formControlName="AuthorName" required>
+            </mat-form-field>
+            <p *ngIf="getFormErrors.AuthorName.touched && getFormErrors.AuthorName.invalid">Book Name is required</p>
+          </div>
+
+          <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput name="price" [(ngModel)]="bookInfo.price" type="number" formControlName="Price" required>
+              </mat-form-field>
+              <p *ngIf="getFormErrors.Price.touched && getFormErrors.Price.invalid">Book Name is required</p>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Image Url</mat-label>
+                  <input matInput name="imageUrl" [(ngModel)]="bookInfo.imageUrl" formControlName="ImageUrl" required>
+                </mat-form-field>
+                <p *ngIf="getFormErrors.ImageUrl.touched && getFormErrors.ImageUrl.invalid">Book Name is required</p>
+              </div>
+
+        </div>
+      </form>
+      <mat-card-actions align="start">
+          <button mat-button (click)="addBook()">Submit</button>
+          
+      </mat-card-actions>
+      <mat-card-footer>
+          <!-- Footer -->
+      </mat-card-footer>
+  </mat-card>
+</div>
