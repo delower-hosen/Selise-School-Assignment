@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { getElementDepthCount } from '@angular/core/src/render3/state';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-book',
@@ -9,19 +9,18 @@ import { MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./add-book.component.scss']
 })
 export class AddBookComponent implements OnInit {
-
+  public formAddBook: FormGroup;
   constructor(
-    private _snackBar = MatSnackBar,
+    private _toastr: ToastrService
   ) { 
   }
 
   ngOnInit() {
-
+    this.intitForm();
   }
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      this.openSnackBar('hello', 'bye');
       let key = 'mystore';
       let newBook = this.formAddBook.value;
       console.log(newBook);
@@ -32,20 +31,20 @@ export class AddBookComponent implements OnInit {
       }
       Books.push(newBook);
       localStorage.setItem(key,JSON.stringify(Books));
-      this.formAddBook.reset();
+      this.showSuccess();
+      this.resetForm();
     }
   }
 
-  formAddBook = new FormGroup({
-    bookname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-    authorname: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    price: new FormControl('', [Validators.required, Validators.min(1)]),
-    imageurl: new FormControl('', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])
-  });
-  
-  get bookname(){
-    return this.formAddBook.get('bookname');
+  intitForm(){
+    this.formAddBook = new FormGroup({
+      bookname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      authorname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      price: new FormControl('', [Validators.required, Validators.min(1)]),
+      imageurl: new FormControl('', [Validators.required])
+    });
   }
+  
 
   get getFormErrors() {
     return this.formAddBook.controls;
@@ -60,10 +59,14 @@ export class AddBookComponent implements OnInit {
     return flag;
   }
 
-  openSnackBar(message: string, action: string) {
-    // this._snackBar.open(message, action, {
-    //   duration: 2000,
-    // });
+  showSuccess() {
+    this._toastr.success('Book added succussfully');
+  }
+
+  resetForm(){
+    setTimeout(() => {
+      this.intitForm();
+    });
   }
 
 }

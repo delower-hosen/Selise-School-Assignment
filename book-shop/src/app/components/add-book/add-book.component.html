@@ -10,7 +10,7 @@
           <div fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Book Name</mat-label>
-              <input matInput name="bookName" formControlName="bookname">
+              <input matInput name="bookName" formControlName="bookname" required>
               <mat-hint>
                 <div class="errorMessage" *ngIf="getFormErrors.bookname.touched && getFormErrors.bookname.invalid">
                   <small *ngIf="getFormErrors.bookname.errors?.required">This is required</small>
@@ -51,6 +51,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Image Url</mat-label>
                   <input matInput name="imageUrl" formControlName="imageurl" required>
+                  
                   <mat-hint>
                     <div class="errorMessage" *ngIf="getFormErrors.imageurl.touched && getFormErrors.imageurl.invalid">
                       <small *ngIf="getFormErrors.imageurl.errors?.required">This is required</small>
@@ -61,9 +62,10 @@
               </div>
 
         </div>
-        <mat-card-actions align="start">
-          <button mat-flat-button type="submit">Submit</button>
-          
+        <div>
+        </div>
+        <mat-card-actions>
+          <button mat-flat-button [disabled]="formAddBook.invalid" type="submit" color="primary">Submit</button>
       </mat-card-actions>
       </form>
 
