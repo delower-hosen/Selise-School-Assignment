@@ -1,0 +1,14 @@
+<button class="newBook" mat-flat-button color="primary" (click)="openModal()">New Book</button>
+<div class="ngxdatatable">
+    <ngx-datatable
+        class="material server-scrolling-demo"
+        [rows]="rows"
+        [columns]="[{name:'Name'},{name:'Author'},{name:'Price'}]"
+        [columnMode]="'force'"
+        [headerHeight]="headerHeight"
+        [rowHeight]="rowHeight"
+        [loadingIndicator]="isLoading"
+        [scrollbarV]="true"
+        (scroll)="onScroll($event.offsetY)"
+    ></ngx-datatable>
+</div>

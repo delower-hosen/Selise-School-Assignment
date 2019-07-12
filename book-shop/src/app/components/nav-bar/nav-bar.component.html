@@ -2,12 +2,13 @@
 <div class="navbar" fxLayout="column wrap">
   <div>
     <a mat-button color="primary" routerLink="/home" >Home</a>
-    <a mat-button color="primary">Shopping Cart</a>
+    <a mat-button matBadge="1" matBadgeOverlap="true" matBadgePosition="after" matBadgeColor="accent" color="primary" routerLink="/home">Shopping Cart</a>
+    <!-- <mat-icon>shopping_cart</mat-icon> -->
     <mat-form-field>
       <mat-label>Delower</mat-label>
       <mat-select>
         <mat-option mat-button color="primary" value="option1" routerLink="/manageproduct" >Product Mangement</mat-option>
-        <mat-option mat-button color="primary" value="option2">Product Edit</mat-option>
+        <mat-option mat-button color="primary" value="option2">My Purchase</mat-option>
         <mat-option mat-button color="primary" value="option3">Log Out</mat-option>
       </mat-select>
     </mat-form-field>

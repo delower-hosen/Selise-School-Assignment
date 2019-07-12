@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
 
   getBooks(){
     this.books = JSON.parse(localStorage.getItem('mystore'));
-    console.log(this.books);
+  }
+
+  addToCart(book){
+    localStorage.setItem('mycart', JSON.stringify(book));
   }
 
 }

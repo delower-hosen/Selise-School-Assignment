@@ -15,12 +15,20 @@ import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import {MatSelectModule} from '@angular/material/select';
+import { BookManagementComponent } from './components/book-management/book-management.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     AppComponent,
     AddBookComponent,
     HomeComponent,
     NavBarComponent,
+    BookManagementComponent,
+  ],
+  entryComponents: [
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
@@ -39,11 +47,14 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatDialogModule,
+    NgxDatatableModule,
+    MatBadgeModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'manageproduct', component: AddBookComponent }
+      { path: 'manageproduct', component: BookManagementComponent }
     ])
   ],
   providers: [],

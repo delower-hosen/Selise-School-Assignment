@@ -1,0 +1,44 @@
+.productModal{
+    height: 400px;
+    width:  600px;
+    background-color: antiquewhite;
+}
+
+.newBook{
+    margin: 0 0 20px 95px;
+}
+
+.ngx-datatable{
+  margin: 0 95px 95px 95px;
+}
+
+
+.server-scrolling-demo {
+    height: calc(100vh - 110px);
+  }
+  
+  .server-scrolling-demo .progress-linear {
+    position: fixed !important;
+    bottom: 0px;
+  }
+
+  .ngx-datatable.material {
+    background: #FFF;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+  }
+
+  .empty-row{
+    height:50px;
+    text-align: left;
+    padding: .5rem 1.2rem;
+    vertical-align: top;
+    border-top: 0;
+ }
+
+ .loading-row{
+  text-align: left;
+  padding: .5rem 1.2rem;
+  vertical-align: top;
+  border-top: 0;
+}
+
