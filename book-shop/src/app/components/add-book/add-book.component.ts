@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
+import { defultConstant } from './../../config/constants/default.constant'
 
 @Component({
   selector: 'app-add-book',
@@ -21,16 +22,17 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      let key = 'mystore';
+      // let key = 'mystore';
+      let storeKey = defultConstant.Keys.StoreKey;
       let newBook = this.formAddBook.value;
       console.log(newBook);
       
       let Books: Array<any> = [];
-      if(JSON.parse(localStorage.getItem(key))){
-        Books = JSON.parse(localStorage.getItem(key));
+      if(JSON.parse(localStorage.getItem(storeKey))){
+        Books = JSON.parse(localStorage.getItem(storeKey));
       }
       Books.push(newBook);
-      localStorage.setItem(key,JSON.stringify(Books));
+      localStorage.setItem(storeKey, JSON.stringify(Books));
       this.showSuccess();
       this.resetForm();
     }

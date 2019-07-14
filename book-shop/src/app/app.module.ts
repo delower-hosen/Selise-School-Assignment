@@ -19,6 +19,7 @@ import { BookManagementComponent } from './components/book-management/book-manag
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSelectModule,
     MatDialogModule,
     NgxDatatableModule,
+    MatRadioModule,
     MatBadgeModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([

@@ -5,8 +5,23 @@
 }
 
 .newBook{
-    margin: 0 0 20px 95px;
+    margin: 30px 0 20px 95px;
 }
+
+.fa{
+  padding-right: 10px;
+  padding-bottom: 2px;
+}
+
+// input{
+//   height: 40px;
+//   width: 95%;
+// }
+button{
+  width: 69%;
+  height: 45px;
+}
+
 
 .ngx-datatable{
   margin: 0 95px 95px 95px;
@@ -42,3 +57,34 @@
   border-top: 0;
 }
 
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 85%;
+  height: 23px;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
