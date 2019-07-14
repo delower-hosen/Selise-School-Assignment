@@ -1,13 +1,23 @@
 
-<div class="navbar" fxLayout="column wrap">
-  <div>
-    <ul>
-      <li><a mat-button color="primary" routerLink="/home" >Dashboard</a></li>
-      <li><a mat-button matBadge="1" matBadgeOverlap="true" matBadgePosition="after" matBadgeColor="accent" color="primary" routerLink="/home">My Cart</a></li>
-      <li><a mat-button color="primary" routerLink="/manageproduct" >Product Mangemen</a></li>
-    </ul>
-    <!-- <a mat-button color="primary" routerLink="/home" >Home</a>
-    <a mat-button matBadge="1" matBadgeOverlap="true" matBadgePosition="after" matBadgeColor="accent" color="primary" routerLink="/home">Shopping Cart</a>
-    <a mat-button color="primary" routerLink="/manageproduct" >Product Mangemen</a> -->
-  </div>
+<div class="navbar" fxLayout="column">
+    <div class="navText" routerLink="/home">
+      <span>
+          <a  color="primary" >Dashboard</a>
+      </span>
+    </div>
+
+    <div class="navText" routerLink="/home">
+      <span> 
+        <a  matBadge="1" matBadgeOverlap="false" matBadgePosition="after" matBadgeColor="accent" color="primary"> My Cart</a>
+      </span>
+    </div>
+
+    <div class="navText" routerLink="/manageproduct" >
+      <span>
+        <a  color="primary" >Management</a>
+      </span>
+    </div>
+
+
+
 </div>
