@@ -1,3 +1,4 @@
+import { MockServerResultsService } from './sevices/book.service';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,7 @@ import {MatRadioModule} from '@angular/material/radio';
     HomeComponent,
     NavBarComponent,
     BookManagementComponent,
+    ShoppingCartComponent,
   ],
   entryComponents: [
     AddBookComponent
@@ -52,6 +56,7 @@ import {MatRadioModule} from '@angular/material/radio';
     NgxDatatableModule,
     MatRadioModule,
     MatBadgeModule,
+    FilterPipeModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
@@ -59,7 +64,7 @@ import {MatRadioModule} from '@angular/material/radio';
       { path: 'manageproduct', component: BookManagementComponent }
     ])
   ],
-  providers: [],
+  providers: [MockServerResultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

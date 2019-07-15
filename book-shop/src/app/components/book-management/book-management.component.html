@@ -1,9 +1,7 @@
 <div class="newBook" fxLayout="row">
     <div fxFlex="80">
-        <!-- <input type="text" placeholder="Search by name">
-        <button type="submit"><i class="fa fa-search"></i></button> -->
         <form class="example" action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
+            <input type="text" placeholder="Search.." name="search" (keyup)="updateFilter($event)">
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
     </div>
@@ -14,16 +12,20 @@
     </div>
 </div>
 
-<div class="ngxdatatable">
-    <ngx-datatable
-        class="material server-scrolling-demo"
-        [rows]="rows"
-        [columns]="[{name:'Name'},{name:'Author'},{name:'Price'}]"
-        [columnMode]="'force'"
-        [headerHeight]="headerHeight"
-        [rowHeight]="rowHeight"
-        [loadingIndicator]="isLoading"
-        [scrollbarV]="true"
-        (scroll)="onScroll($event.offsetY)"
-    ></ngx-datatable>
+<div>
+  <ngx-datatable
+    #table
+    class="material"
+    [rows]="rows"
+    [columns]="[{name:'Name'},{name:'Author'},{name:'Price'}]"
+    [columnMode]="'force'"
+    [headerHeight]="60"
+    [footerHeight]="60"
+    [rowHeight]="'55'"
+    [externalPaging]="true"
+    [count]="page.totalElements"
+    [offset]="page.pageNumber"
+    [limit]="page.size"
+    (page)='setPage($event)'>
+  </ngx-datatable>
 </div>

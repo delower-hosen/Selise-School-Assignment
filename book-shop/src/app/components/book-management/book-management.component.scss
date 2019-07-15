@@ -13,29 +13,15 @@
   padding-bottom: 2px;
 }
 
-// input{
-//   height: 40px;
-//   width: 95%;
-// }
 button{
   width: 69%;
   height: 45px;
 }
 
-
 .ngx-datatable{
   margin: 0 95px 95px 95px;
 }
 
-
-.server-scrolling-demo {
-    height: calc(100vh - 110px);
-  }
-  
-  .server-scrolling-demo .progress-linear {
-    position: fixed !important;
-    bottom: 0px;
-  }
 
   .ngx-datatable.material {
     background: #FFF;
@@ -77,14 +63,4 @@ form.example button {
   border: 1px solid grey;
   border-left: none;
   cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
 }

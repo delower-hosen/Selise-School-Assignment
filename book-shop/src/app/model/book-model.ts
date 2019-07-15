@@ -1,12 +1,12 @@
 export class CorporateEmployee {
-    bookname: string;
-    authorname: string;
-    price: number;
-    imageurl: string
+    name: string;
+    author: string;
+    price: string;
+    imageurl: string;
 
-    constructor(bookname: string, authorname: string, price: number, imageurl: string){
-        this.bookname = bookname;
-        this.authorname = authorname;
+    constructor(name: string, author: string, price: string, imageurl: string){
+        this.name = name;
+        this.author = author;
         this.price = price;
         this.imageurl = imageurl;
     }

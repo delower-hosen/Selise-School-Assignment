@@ -1,6 +1,7 @@
 export const defultConstant = {
     Keys: {
         StoreKey: 'mystore',
-        CartKey: 'mycart'
+        CartKey: 'mycart',
+        QuantityKey: 'quatity'
     }
 }

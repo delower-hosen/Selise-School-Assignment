@@ -1,9 +1,10 @@
+import { Page } from './../../model/page';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddBookComponent } from '../add-book/add-book.component';
-import { MockServerResultsServiceService } from './../../sevices/book.service';
+import { MockServerResultsService } from './../../sevices/book.service'
 import { CorporateEmployee } from './../../model/book-model';
-
+import { FilterPipe } from 'ngx-filter-pipe';
 @Component({
   selector: 'app-book-management',
   templateUrl: './book-management.component.html',
@@ -11,22 +12,58 @@ import { CorporateEmployee } from './../../model/book-model';
 })
 export class BookManagementComponent implements OnInit {
 
-  readonly headerHeight = 50;
-  readonly rowHeight = 50;
-  readonly pageLimit = 10;
-
-  rows = [];
-  isLoading: boolean;
+  page = new Page();
+  rows = new Array<CorporateEmployee>();
+  temp  = new Array<CorporateEmployee>();
 
   constructor(
     private dialog: MatDialog,
-    private serverResultsService: MockServerResultsServiceService,
-    private el: ElementRef
-  ) { }
+    private serverResultsService: MockServerResultsService,
+    private el: ElementRef,
+    private filterPipe: FilterPipe
+  ) {
+    this.page.pageNumber = 0;
+    this.page.size = 10;
+   }
 
   ngOnInit() {
-    this.onScroll(0);
+    this.setPage({ offset: 0 });
   }
+
+   /**
+   * Populate the table with new data based on the page number
+   * @param page The page to select
+   */
+
+  setPage(pageInfo){
+    this.page.pageNumber = pageInfo.offset;
+    this.serverResultsService.getResults(this.page).subscribe(pagedData => {
+      this.page = pagedData.page;
+      this.rows = pagedData.data;
+      this.temp = [...this.rows];
+    });
+  }
+
+  updateFilter(event) {
+    debugger;
+    const val = event.target.value.toLowerCase();
+    console.log(val);
+    // filter our data
+    const temp = this.temp.filter(function(d) {
+      debugger;
+      let x = d.name.toLowerCase().indexOf(val) !== -1;
+      return x;
+    });
+    console.log(temp);;
+    
+
+    // update the rows
+    this.rows = temp;
+    // Whenever the filter changes, always go back to the first page
+    // this.table.offset = 0;
+    // this.setPage({ offset: 0 });
+  }
+
 
   openModal(){
     this.dialog.open(AddBookComponent, {
@@ -37,46 +74,5 @@ export class BookManagementComponent implements OnInit {
         console.log(result);
       });
   }
-
-  onScroll(offsetY: number) {
-    // total height of all rows in the viewport
-    const viewHeight =
-      this.el.nativeElement.getBoundingClientRect().height - this.headerHeight;
-
-    // check if we scrolled to the end of the viewport
-    if (
-      !this.isLoading &&
-      offsetY + viewHeight >= this.rows.length * this.rowHeight
-    ) {
-      // total number of results to load
-      let limit = this.pageLimit;
-
-      // check if we haven't fetched any results yet
-      if (this.rows.length === 0) {
-        // calculate the number of rows that fit within viewport
-        const pageSize = Math.ceil(viewHeight / this.rowHeight);
-
-        // change the limit to pageSize such that we fill the first page entirely
-        // (otherwise, we won't be able to scroll past it)
-        limit = Math.max(pageSize, this.pageLimit);
-      }
-      this.loadPage(limit);
-    }
-  }
-
-  private loadPage(limit: number) {
-    // debugger;
-    // set the loading flag, which serves two purposes:
-    // 1) it prevents the same page from being loaded twice
-    // 2) it enables display of the loading indicator
-    this.isLoading = true;
-
-    this.serverResultsService.getResults(this.rows.length, limit).subscribe(results => {
-      let rows = [...this.rows, ...results.data];
-       this.rows = rows;
-      this.isLoading = false;
-    });
-  }
-
 
 }
