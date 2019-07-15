@@ -1,4 +1,4 @@
-export class CorporateEmployee {
+export class BookModel {
     name: string;
     author: string;
     price: string;

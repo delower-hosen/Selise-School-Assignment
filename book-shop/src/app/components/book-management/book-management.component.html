@@ -1,15 +1,16 @@
-<div class="newBook" fxLayout="row">
-    <div fxFlex="80">
-        <form class="example" action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search" (keyup)="updateFilter($event)">
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-    </div>
-    <div fxFlex="20">
-     <button mat-flat-button color="primary" (click)="openModal()">
-            <i class="fa fa-plus"></i>
-            ADD BOOK</button>
-    </div>
+<div fxLayout="column" fxFlex="100">
+<div class="searchBar"fxLayoutGap="40px" fxLayout="row wrap">
+  <div class="search" fxFlex="78">
+      <mat-form-field appearance="outline">
+          <input matInput type="text" placeholder="Search book by name" (keyup)="updateFilter($event)" >
+          <button mat-button color="primary" matPrefix mat-icon-button>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+  </div>
+  <div class="addButton" fxFlex="18">
+    <button mat-flat-button color="primary" (click)="openModal()"><i class="fa fa-plus"></i>ADD BOOK</button>
+  </div>
 </div>
 
 <div>
@@ -28,4 +29,6 @@
     [limit]="page.size"
     (page)='setPage($event)'>
   </ngx-datatable>
+</div>
+
 </div>

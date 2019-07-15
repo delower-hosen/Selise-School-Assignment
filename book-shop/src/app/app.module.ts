@@ -61,7 +61,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'manageproduct', component: BookManagementComponent }
+      { path: 'manageproduct', component: BookManagementComponent },
+      { path: 'shopping-cart', component: ShoppingCartComponent }
     ])
   ],
   providers: [MockServerResultsService],

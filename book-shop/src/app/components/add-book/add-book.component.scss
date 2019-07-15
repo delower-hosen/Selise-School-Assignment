@@ -1,17 +1,20 @@
 .card {
     width: 600px;
     // background-color: honeydew;
-    flex-direction: flex;
+    // flex-direction: flex;
     float: center;
-    padding: 60px !important;
+    padding: 30px 0 0 0 !important;
 }
 
 .mat-form-field{
-    width: 85%;
+    width: 100%;
 }
 .errorMessage{
     color: red;
-    font-size: 16px;
+    font-size: 14px;
+}
+.title{
+    margin-top: -50px;
 }
 
 mat-card-actions{

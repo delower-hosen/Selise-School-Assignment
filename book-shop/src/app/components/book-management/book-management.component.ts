@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { MockServerResultsService } from './../../sevices/book.service'
-import { CorporateEmployee } from './../../model/book-model';
+import { BookModel } from './../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
 @Component({
   selector: 'app-book-management',
@@ -13,13 +13,12 @@ import { FilterPipe } from 'ngx-filter-pipe';
 export class BookManagementComponent implements OnInit {
 
   page = new Page();
-  rows = new Array<CorporateEmployee>();
-  temp  = new Array<CorporateEmployee>();
+  rows = new Array<BookModel>();
+  temp  = new Array<BookModel>();
 
   constructor(
     private dialog: MatDialog,
     private serverResultsService: MockServerResultsService,
-    private el: ElementRef,
     private filterPipe: FilterPipe
   ) {
     this.page.pageNumber = 0;
@@ -29,11 +28,6 @@ export class BookManagementComponent implements OnInit {
   ngOnInit() {
     this.setPage({ offset: 0 });
   }
-
-   /**
-   * Populate the table with new data based on the page number
-   * @param page The page to select
-   */
 
   setPage(pageInfo){
     this.page.pageNumber = pageInfo.offset;
@@ -45,25 +39,16 @@ export class BookManagementComponent implements OnInit {
   }
 
   updateFilter(event) {
-    debugger;
-    const val = event.target.value.toLowerCase();
-    console.log(val);
-    // filter our data
-    const temp = this.temp.filter(function(d) {
+    const searchValue = event.target.value.toLowerCase();
+
+    const temp = this.temp.filter(function(book) {
       debugger;
-      let x = d.name.toLowerCase().indexOf(val) !== -1;
-      return x;
+      let matchedBook = book.name.toLowerCase().indexOf(searchValue) !== -1;
+      return matchedBook;
     });
-    console.log(temp);;
-    
 
-    // update the rows
     this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    // this.table.offset = 0;
-    // this.setPage({ offset: 0 });
   }
-
 
   openModal(){
     this.dialog.open(AddBookComponent, {
