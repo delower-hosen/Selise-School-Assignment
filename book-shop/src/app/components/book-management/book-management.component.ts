@@ -1,6 +1,6 @@
 import { Page } from './../../model/page';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { MockServerResultsService } from './../../sevices/book.service'
 import { BookModel } from './../../model/book-model';
@@ -48,6 +48,7 @@ export class BookManagementComponent implements OnInit {
     });
 
     this.rows = temp;
+    this.page.totalElements = this.rows.length;
   }
 
   openModal(){

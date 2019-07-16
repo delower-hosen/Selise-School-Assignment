@@ -25,11 +25,12 @@ export class HomeComponent implements OnInit {
     this.books = JSON.parse(localStorage.getItem(this.storeKey));
   }
 
-  addToCart(book){
-    localStorage.setItem(this.cartKey, JSON.stringify(book));
+  addToCart(book: any){
+    let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
+    previousBooks.push(book);
+    localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
     this.bookItems++;
     localStorage.setItem(this.quantityKey, JSON.stringify(this.bookItems));
-    debugger;
     this._cartService.emitNavChangeEvent(this.bookItems);
   }
 

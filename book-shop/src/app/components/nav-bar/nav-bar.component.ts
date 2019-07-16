@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
   }
   selectedNavItem(totalPurchase: number){
     this.numberOfBooks = totalPurchase;
-    debugger;
   }
 
   ngOnDestroy() {

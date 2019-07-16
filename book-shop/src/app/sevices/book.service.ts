@@ -5,7 +5,7 @@ import { PagedData } from './../model/paged-data';
 import { BookModel } from './../model/book-model';
 import { Page } from './../model/page';
 // const companyData = require('./../../assets/company.json');
-const Data = JSON.parse(localStorage.getItem('mystore'));
+const Data = JSON.parse(localStorage.getItem('mystore'))?JSON.parse(localStorage.getItem('mystore')):[];
 const companyData = [];
 for(let data of Data){
   let boo = {

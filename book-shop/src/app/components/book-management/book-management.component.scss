@@ -46,17 +46,17 @@
     width: 133.33333%;
   }
 
-  .ngx-datatable {
+  ::ng-deep .ngx-datatable {
     margin: 0 40px 40px 40px;
   }
 
 
-  .ngx-datatable.material {
+  ::ng-deep .ngx-datatable.material {
     background: #FFF;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
   }
 
-  .empty-row {
+  ::ng-deep .empty-row {
     height: 50px;
     text-align: left;
     padding: .5rem 1.2rem;
@@ -64,40 +64,17 @@
     border-top: 0;
   }
 
-  .loading-row {
+  ::ng-deep .loading-row {
     text-align: left;
     padding: .5rem 1.2rem;
     vertical-align: top;
     border-top: 0;
   }
 
-  form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 85%;
-    height: 23px;
-    background: #f1f1f1;
-  }
-
-  form.example button {
-    float: left;
-    width: 10%;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
   ::ng-deep .datatable-header {
     background-color: #E8EAED;
 
     .datatable-header-cell-label {
-      padding: 10px 0 0 10px;
       font-size: 20px;
     }
   }

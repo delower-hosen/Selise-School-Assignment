@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { defultConstant } from './../../config/constants/default.constant'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-book',
@@ -12,7 +13,8 @@ import { defultConstant } from './../../config/constants/default.constant'
 export class AddBookComponent implements OnInit {
   public formAddBook: FormGroup;
   constructor(
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private dialogRef: MatDialogRef<AddBookComponent>
   ) { 
   }
 
@@ -34,6 +36,7 @@ export class AddBookComponent implements OnInit {
       Books.push(newBook);
       localStorage.setItem(storeKey, JSON.stringify(Books));
       this.showSuccess();
+      this.dialogRef.close();
       this.resetForm();
     }
   }
