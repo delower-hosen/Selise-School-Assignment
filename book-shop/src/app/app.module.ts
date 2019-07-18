@@ -61,6 +61,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     FilterPipeModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },

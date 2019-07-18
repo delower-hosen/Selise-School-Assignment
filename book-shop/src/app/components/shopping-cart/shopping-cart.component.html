@@ -4,35 +4,35 @@
     <div *ngFor="let book of books" fxFlex="100" fxLayoutAlign="space-around"  class="myBook">
       <mat-card class="carCard">
         <div fxFlex="100" fxLayout="row">
-          <div class="image" fxFlex="12">
+          <div class="image" fxFlex="15">
             <img src="{{book.imageurl}}" alt="book">
           </div>
-          <div fxFlex="40" class="title" fxFlexAlign="start" fxLayout="column">
+          <div fxFlex="45" class="title" fxFlexAlign="start" fxLayout="column">
                 <mat-card-title-group>
                     <mat-card-title>{{book.bookname}}</mat-card-title>
                     <mat-card-subtitle>{{book.authorname}}</mat-card-subtitle>
                 </mat-card-title-group>
                 <mat-card-actions>
-                    <mat-icon class="mat-18 deleteIcon">delete</mat-icon>
+                    <mat-icon (click)="removeBook(book)" class="mat-18 deleteIcon">delete</mat-icon>
                 </mat-card-actions>
           </div>
-          <div class="tata" fxFlex="20" fxFlexAlign="space-around center" fxLayout="column">
+          <div class="tata" fxFlex="10" fxFlexAlign="space-around center" fxLayout="column">
             <div class="space">
 
             </div>
             <div fxLayout="row wrap">
-              <div>
+              <!-- <div>
                 <i class="fa fa-plus"></i>
-              </div>
+              </div> -->
               <div>
                 <input [value]="book.quantity" type="number">
               </div>
-              <div>
+              <!-- <div>
                 <i class="fa fa-minus"></i>
-              </div>
+              </div> -->
             </div>
           </div>
-          <div fxFlex="30" fxFlexAlign="space-around center" fxLayout="column">
+          <div fxFlex="20" fxFlexAlign="space-around center" fxLayout="column">
             <div fxFlex="50">
 
             </div>

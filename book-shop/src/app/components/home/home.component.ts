@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
     let doesExist: boolean = false;
     for(let previousbook of previousBooks){
-      if(previousbook.generatedGuid == book.generatedGuid){
+      if(previousbook.bookId == book.bookId){
         doesExist = true;
         previousbook.quantity++;
         localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));

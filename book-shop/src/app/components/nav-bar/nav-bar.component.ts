@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class NavBarComponent implements OnInit {
   numberOfBooks: number = 0;
   subscription: Subscription;
+  subscriptionDelete: Subscription;
   public x: number;
   public cartKey = defultConstant.Keys.CartKey;
   constructor(
@@ -18,16 +19,22 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
+      this.deleteBooks(deletedbooks);
+    })
     this.numberOfBooks = this.getQuantity();
     this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => this.selectedNavItem(totalPurchase));
   }
   selectedNavItem(totalPurchase: number){
     this.numberOfBooks = totalPurchase;
   }
+  deleteBooks(quantity: number){
+    this.numberOfBooks -= quantity;
+  }
 
   getQuantity(){
     let cart: Array<any> = [];
-    cart = JSON.parse(localStorage.getItem(this.cartKey));
+    cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
     let total: number = 0;
     for(let c of cart){
       total += c.quantity;
