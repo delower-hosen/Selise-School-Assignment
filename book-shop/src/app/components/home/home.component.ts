@@ -26,11 +26,26 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(book: any){
-    let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
-    previousBooks.push(book);
-    localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
-    this.bookItems++;
-    localStorage.setItem(this.quantityKey, JSON.stringify(this.bookItems));
+    debugger;
+    this.bookItems = 0;
+    let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
+    let doesExist: boolean = false;
+    for(let previousbook of previousBooks){
+      if(previousbook.generatedGuid == book.generatedGuid){
+        doesExist = true;
+        previousbook.quantity++;
+        localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
+      }
+      this.bookItems += previousbook.quantity;
+    }
+    if(!doesExist){
+      previousBooks.push(book);
+      book.quantity = 1;
+      localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
+      this.bookItems += book.quantity;
+    }
+    // this.bookItems++;
+    // localStorage.setItem(this.quantityKey, JSON.stringify(this.bookItems));
     this._cartService.emitNavChangeEvent(this.bookItems);
   }
 

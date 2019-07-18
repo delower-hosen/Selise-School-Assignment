@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { defultConstant } from './../../config/constants/default.constant'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
+
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -12,6 +13,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class AddBookComponent implements OnInit {
   public formAddBook: FormGroup;
+  maxDate = new Date();
   constructor(
     private _toastr: ToastrService,
     private dialogRef: MatDialogRef<AddBookComponent>
@@ -24,11 +26,12 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      // let key = 'mystore';
+      debugger;
       let storeKey = defultConstant.Keys.StoreKey;
+      let generatedGuid = this.guid();
       let newBook = this.formAddBook.value;
+      newBook.bookId = generatedGuid;
       console.log(newBook);
-      
       let Books: Array<any> = [];
       if(JSON.parse(localStorage.getItem(storeKey))){
         Books = JSON.parse(localStorage.getItem(storeKey));
@@ -46,7 +49,8 @@ export class AddBookComponent implements OnInit {
       bookname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       authorname: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.min(1)]),
-      imageurl: new FormControl('', [Validators.required])
+      imageurl: new FormControl('', [Validators.required]),
+      createddate: new FormControl('', [Validators.required])
     });
   }
   
@@ -73,5 +77,13 @@ export class AddBookComponent implements OnInit {
       this.intitForm();
     });
   }
+
+  guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+  
 
 }

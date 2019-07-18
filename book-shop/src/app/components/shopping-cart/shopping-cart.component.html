@@ -1,13 +1,13 @@
 <div class="bookStore" fxFlex="100" fxLayoutGap="10px" fxLayout="row wrap">
 
   <div class="mycart" fxFlex="65" fxLayout="column" fxLayoutGap="10px">
-    <div *ngFor="let book of books" fxLayoutAlign="space-around"  class="myBook">
+    <div *ngFor="let book of books" fxFlex="100" fxLayoutAlign="space-around"  class="myBook">
       <mat-card class="carCard">
         <div fxFlex="100" fxLayout="row">
           <div class="image" fxFlex="12">
             <img src="{{book.imageurl}}" alt="book">
           </div>
-          <div fxFlex="40" fxFlexAlign="start" fxLayout="column">
+          <div fxFlex="40" class="title" fxFlexAlign="start" fxLayout="column">
                 <mat-card-title-group>
                     <mat-card-title>{{book.bookname}}</mat-card-title>
                     <mat-card-subtitle>{{book.authorname}}</mat-card-subtitle>
@@ -16,17 +16,28 @@
                     <mat-icon class="mat-18 deleteIcon">delete</mat-icon>
                 </mat-card-actions>
           </div>
-          <div fxFlex="40">
-                <i class="fa fa-plus"></i>
-                <input type="text">
-                <i class="fa fa-minus"></i>
-          </div>
-          <div fxFlex="10" fxFlexAlign="space-around center" fxLayout="column">
-            <div>
+          <div class="tata" fxFlex="20" fxFlexAlign="space-around center" fxLayout="column">
+            <div class="space">
 
             </div>
-            <div class="price">
-              <span class="taka">{{book.price}} Tk.</span>
+            <div fxLayout="row wrap">
+              <div>
+                <i class="fa fa-plus"></i>
+              </div>
+              <div>
+                <input [value]="book.quantity" type="number">
+              </div>
+              <div>
+                <i class="fa fa-minus"></i>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="30" fxFlexAlign="space-around center" fxLayout="column">
+            <div fxFlex="50">
+
+            </div>
+            <div fxFlex="50" class="price">
+              <span class="taka">{{book.price*book.quantity}} Tk.</span>
             </div>
             <div></div>
           </div>
