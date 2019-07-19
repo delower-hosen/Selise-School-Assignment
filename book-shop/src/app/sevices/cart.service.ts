@@ -6,6 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class CartService {
   navchange: EventEmitter<number> = new EventEmitter();
   cartdelete: EventEmitter<number> = new EventEmitter();
+  cartchange: EventEmitter<number> = new EventEmitter();
   
   constructor() { }
 
@@ -21,5 +22,12 @@ export class CartService {
   }
   getCartDeleteEmitter(){
     return this.cartdelete;
+  }
+
+  emitChangeOfCartQuantity(x : number){
+    this.cartchange.emit(x);
+  }
+  getChangeOfCartQuantity(){
+    return this.cartchange;
   }
 }

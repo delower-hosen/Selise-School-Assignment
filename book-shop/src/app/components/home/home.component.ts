@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   public cartKey = defultConstant.Keys.CartKey;
   public quantityKey = defultConstant.Keys.QuantityKey;
   public bookItems: number = 0;
+  public changeQuantity: number;
   constructor(
     private _cartService: CartService
   ) { }
@@ -26,10 +27,10 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(book: any){
-    debugger;
     this.bookItems = 0;
     let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
     let doesExist: boolean = false;
+    book.isChecked = true;
     for(let previousbook of previousBooks){
       if(previousbook.bookId == book.bookId){
         doesExist = true;
@@ -44,8 +45,6 @@ export class HomeComponent implements OnInit {
       localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
       this.bookItems += book.quantity;
     }
-    // this.bookItems++;
-    // localStorage.setItem(this.quantityKey, JSON.stringify(this.bookItems));
     this._cartService.emitNavChangeEvent(this.bookItems);
   }
 

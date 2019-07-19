@@ -20,7 +20,7 @@
         height: 600px;
     }
     .deleteIcon{
-        color: gray;
+        // color: gray;
         cursor: pointer;
         &:hover{
             color: red;
@@ -54,6 +54,19 @@
         background: gray;
         cursor: pointer;
         padding: 15px 12px 15px 12px;
+    }
+    // .cartButton{
+    //     // background-color: gray;
+    //     // width: 30px;
+    //     // height: 30px;
+    //     cursor: pointer;
+    // }
+
+    .cartQuantity{
+        // border: 1px solid gray;
+        width: 30px;
+        height: 30px;
+        text-align: center;
     }
 
 }

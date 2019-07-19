@@ -15,6 +15,7 @@ export class BookManagementComponent implements OnInit {
   page = new Page();
   rows = new Array<BookModel>();
   temp  = new Array<BookModel>();
+  selected = [];
 
   constructor(
     private dialog: MatDialog,
@@ -49,6 +50,14 @@ export class BookManagementComponent implements OnInit {
 
     this.rows = temp;
     this.page.totalElements = this.rows.length;
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+  }
+
+  onActivate(event) {
+    console.log('Activate Event', event);
   }
 
   openModal(){

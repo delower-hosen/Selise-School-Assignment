@@ -12,7 +12,7 @@ for(let data of Data){
     "name": data.bookname,
     "author": data.authorname,
     "price": data.price,
-    "ImageUrl": data.imageurl
+    "bookid": data.bookId
   };
 
   companyData.push(boo);
@@ -44,7 +44,7 @@ export class MockServerResultsService {
         const end = Math.min((start + page.size), page.totalElements);
         for (let i = start; i < end; i++){
             const jsonObj = companyData[i];
-            const employee = new BookModel(jsonObj.name, jsonObj.author, jsonObj.price, jsonObj.imageurl);
+            const employee = new BookModel(jsonObj.bookid, jsonObj.name, jsonObj.author, jsonObj.price);
             pagedData.data.push(employee);
         }
         pagedData.page = page;

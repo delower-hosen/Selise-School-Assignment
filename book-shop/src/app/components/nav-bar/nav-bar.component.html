@@ -1,18 +1,18 @@
 
 <div class="navbar" fxLayout="column">
-    <div class="navText" routerLink="/home">
+    <div class="navText" [ngClass]="{'activeTab': (this.selectedTab=='dashboard')}" routerLink="/home" (click)="selectTab('dashboard')">
       <span>
           <a  color="primary" >Dashboard</a>
       </span>
     </div>
 
-    <div class="navText" routerLink="/shopping-cart">
+    <div class="navText" [ngClass]="{'activeTab': (selectedTab=='mycart')}" routerLink="/shopping-cart" (click)="selectTab('mycart')">
       <span> 
         <a  matBadge="{{numberOfBooks}}" matBadgeOverlap="false" matBadgePosition="after" matBadgeColor="accent" color="primary"> My Cart</a>
       </span>
     </div>
 
-    <div class="navText" routerLink="/manageproduct" >
+    <div class="navText" [ngClass]="{'activeTab': (selectedTab=='management')}"  routerLink="/manageproduct" (click)="selectTab('management')">
       <span>
         <a  color="primary" >Management</a>
       </span>

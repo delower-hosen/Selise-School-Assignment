@@ -21,10 +21,8 @@ export class ShoppingCartComponent implements OnInit {
 
   getBooks(){
     this.books = JSON.parse(localStorage.getItem(this.cartKey));
-    console.log(this.books);
   }
   removeBook(book){
-    debugger;
     let cart: Array<any> = [];
     let numberofbooks: number = book.quantity;
     cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
@@ -37,6 +35,29 @@ export class ShoppingCartComponent implements OnInit {
     this.getBooks();
     this._cartService.emitCartDeleteEvent(numberofbooks);
     console.log(book);
+  }
+
+  changeQuantityBy(book:any, x:number){
+    if(book.quantity>=1){
+      let cart: Array<any> = [];
+      let flag = 0;
+      cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
+
+      for(let index = 0; index < cart.length; index++){
+        if(cart[index].bookId == book.bookId){
+          cart[index].quantity += x;
+          flag = cart[index].quantity;
+        }
+      }
+      if(flag){
+      localStorage.setItem(this.cartKey, JSON.stringify(cart));
+      this.getBooks();
+      this._cartService.emitChangeOfCartQuantity(x);
+      }
+      else{
+        alert('Enter a positive number or discard the product');
+      }
+    }
   }
 
 }

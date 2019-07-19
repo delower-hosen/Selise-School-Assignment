@@ -17,7 +17,7 @@
   <ngx-datatable
     class="material"
     [rows]="rows"
-    [columns]="[{name:'Name'},{name:'Author'},{name:'Price'}]"
+    [columns]="[{name:'bookid'},{name:'Name'},{name:'Author'},{name:'Price'}]"
     [columnMode]="'force'"
     [headerHeight]="60"
     [footerHeight]="60"
@@ -26,8 +26,21 @@
     [count]="page.totalElements"
     [offset]="page.pageNumber"
     [limit]="page.size"
-    (page)='setPage($event)'>
+    [selected]="selected"
+    [selectionType]="'single'"
+    (page)='setPage($event)'
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'
+    >
   </ngx-datatable>
 </div>
+<div class='selected-column'>
+    <ul>
+      <li *ngFor='let sel of selected'>
+        {{sel.name}}
+      </li>
+      <li *ngIf="!selected.length">No Selections</li>
+    </ul>
+  </div>
 
 </div>

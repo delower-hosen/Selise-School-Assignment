@@ -67,7 +67,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'manageproduct', component: BookManagementComponent },
-      { path: 'shopping-cart', component: ShoppingCartComponent }
+      { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'add-book', component: AddBookComponent}
     ])
   ],
   providers: [MockServerResultsService],

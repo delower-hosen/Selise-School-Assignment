@@ -2,6 +2,7 @@ import { defultConstant } from './../../config/constants/default.constant';
 import { CartService } from './../../sevices/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,15 +13,25 @@ export class NavBarComponent implements OnInit {
   numberOfBooks: number = 0;
   subscription: Subscription;
   subscriptionDelete: Subscription;
+  subscriptionChange: Subscription;
   public x: number;
   public cartKey = defultConstant.Keys.CartKey;
+  public selectedTab: string;
+  public href;
   constructor(
-    private _cartService: CartService
+    private _cartService: CartService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
+    this.href = this._router.getCurrentNavigation;
+    console.log(this.href);
+    debugger;
     this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
       this.deleteBooks(deletedbooks);
+    });
+    this._cartService.getChangeOfCartQuantity().subscribe(response=>{
+      this.numberOfBooks = this.getQuantity();
     })
     this.numberOfBooks = this.getQuantity();
     this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => this.selectedNavItem(totalPurchase));
@@ -42,8 +53,15 @@ export class NavBarComponent implements OnInit {
     return total;
   }
 
+  selectTab(tab: any){
+    this.selectedTab = tab;
+    debugger;
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscriptionDelete.unsubscribe();
+    this.subscriptionChange.unsubscribe();
   }
 
 }

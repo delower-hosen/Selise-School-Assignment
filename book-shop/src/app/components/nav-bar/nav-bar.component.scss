@@ -4,12 +4,14 @@
     font-size: 18px;
     font-weight: 400;
     &:hover{
-       background-color: rgb(245, 237, 237);
+       background-color: rgb(235, 230, 230);
        cursor: pointer; 
     }
-    &:visited {
-        background-color: red;
-        cursor: pointer; 
-    }
     color: dimgrey;
+}
+
+.activeTab {
+    background-color: rgb(209, 205, 205);
+    cursor: pointer; 
+    color: black;
 }
