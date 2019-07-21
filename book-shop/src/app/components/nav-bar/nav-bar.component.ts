@@ -24,38 +24,36 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.href = this._router.getCurrentNavigation;
-    console.log(this.href);
-    debugger;
     this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
       this.deleteBooks(deletedbooks);
     });
-    this._cartService.getChangeOfCartQuantity().subscribe(response=>{
-      this.numberOfBooks = this.getQuantity();
-    })
+    // this._cartService.getChangeOfCartQuantity().subscribe(response=>{
+    //   this.numberOfBooks = this.getQuantity();
+    // })
     this.numberOfBooks = this.getQuantity();
-    this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => this.selectedNavItem(totalPurchase));
+    this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => 
+      this.numberOfBooks = this.getQuantity());
   }
-  selectedNavItem(totalPurchase: number){
-    this.numberOfBooks = totalPurchase;
-  }
+  // selectedNavItem(totalPurchase: number){
+  //   this.numberOfBooks = totalPurchase;
+  // }
   deleteBooks(quantity: number){
-    this.numberOfBooks -= quantity;
+    this.numberOfBooks -= 1;
   }
 
   getQuantity(){
     let cart: Array<any> = [];
     cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
-    let total: number = 0;
-    for(let c of cart){
-      total += c.quantity;
-    }
-    return total;
+    // let total: number = 0;
+    // for(let c of cart){
+    //   total += 1;
+    // }
+    return cart.length;
   }
 
   selectTab(tab: any){
     this.selectedTab = tab;
-    debugger;
+    // debugger;
   }
 
   ngOnDestroy() {

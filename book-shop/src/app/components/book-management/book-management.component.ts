@@ -7,6 +7,8 @@ import { MockServerResultsService } from './../../sevices/book.service'
 import { BookModel } from './../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { defultConstant } from 'src/app/config/constants/default.constant';
+import { ManagementService } from 'src/app/sevices/management.service';
+import { cloneDeep } from 'lodash';
 @Component({
   selector: 'app-book-management',
   templateUrl: './book-management.component.html',
@@ -27,6 +29,7 @@ export class BookManagementComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private serverResultsService: MockServerResultsService,
+    private _managementService: ManagementService,
     private filterPipe: FilterPipe
   ) {
     this.page.pageNumber = 0;
@@ -34,8 +37,27 @@ export class BookManagementComponent implements OnInit {
    }
 
   ngOnInit() {
+    debugger;
+    this._managementService.getTableUpdateEvent().subscribe(book=>{
+      this.updateStore(book);
+    })
     this.setPage({ offset: 0 });
     this.initDataTable();
+  
+  }
+
+  updateStore(book){
+    console.log(this.rows);
+    
+    for(let i = 0; i<this.rows.length;i++){
+      if(this.rows[i].bookid == book.bookid){
+        this.rows[i] = book;
+        this.rows = [...this.rows];
+      }
+    }
+    console.log(this.rows);
+    this.page.totalElements = this.rows.length;
+    
   }
 
   initDataTable() {
@@ -50,34 +72,33 @@ export class BookManagementComponent implements OnInit {
     ]
   }
 
-  delete(itemId) {
-    let remainingBooks = [];
+  delete(book) {
+    debugger;
     let currentCart = [];
     let canBeDeleted: boolean = true;
-    remainingBooks = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
     currentCart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
 
     for(let cart of currentCart){
-      if(cart.bookId == itemId) canBeDeleted = false;
+      if(cart.bookid == book.bookid) canBeDeleted = false;
     }
     if(!canBeDeleted){
       alert("Can't be deleted! This is in shopping cart!")
     }
+    
     if(canBeDeleted){
-    for(let index = 0; index < remainingBooks.length; index++){
-      if(remainingBooks[index].bookId == itemId){
-        remainingBooks.splice(index, 1);
+    for(let index = 0; index<this.rows.length;index++){
+      if(this.rows[index].bookid == book.bookid){
+        this.rows.splice(index, 1);
+        this.rows = [...this.rows];
       }
     }
-    localStorage.setItem('mystore', JSON.stringify(remainingBooks));
-    this.rows = remainingBooks;
     this.page.totalElements = this.rows.length;
+    localStorage.setItem(this.storeKey, JSON.stringify(this.rows));
   }
 
   }
 
   update(row){
-    debugger;
     const dialogRef = this.dialog.open(EditComponent,{
       data: row
     });
@@ -102,7 +123,6 @@ export class BookManagementComponent implements OnInit {
     const searchValue = event.target.value.toLowerCase();
 
     const temp = this.temp.filter(function(book) {
-      debugger;
       let matchedBook = book.name.toLowerCase().indexOf(searchValue) !== -1;
       return matchedBook;
     });

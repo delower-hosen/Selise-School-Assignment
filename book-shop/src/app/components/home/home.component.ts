@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     let doesExist: boolean = false;
     book.isChecked = true;
     for(let previousbook of previousBooks){
-      if(previousbook.bookId == book.bookId){
+      if(previousbook.bookid == book.bookid){
         doesExist = true;
         previousbook.quantity++;
         localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
@@ -44,8 +44,9 @@ export class HomeComponent implements OnInit {
       book.quantity = 1;
       localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
       this.bookItems += book.quantity;
+      this._cartService.emitNavChangeEvent(this.bookItems);
     }
-    this._cartService.emitNavChangeEvent(this.bookItems);
+    // this._cartService.emitNavChangeEvent(this.bookItems);
   }
 
 }

@@ -30,7 +30,7 @@ export class AddBookComponent implements OnInit {
       let storeKey = defultConstant.Keys.StoreKey;
       let generatedGuid = this.guid();
       let newBook = this.formAddBook.value;
-      newBook.bookId = generatedGuid;
+      newBook.bookid = generatedGuid;
       console.log(newBook);
       let Books: Array<any> = [];
       if(JSON.parse(localStorage.getItem(storeKey))){
@@ -46,11 +46,11 @@ export class AddBookComponent implements OnInit {
 
   intitForm(){
     this.formAddBook = new FormGroup({
-      bookname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      authorname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      author: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.min(1)]),
       imageurl: new FormControl('', [Validators.required]),
-      createddate: new FormControl('', [Validators.required])
+      date: new FormControl('', [Validators.required])
     });
   }
   

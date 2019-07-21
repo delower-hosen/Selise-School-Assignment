@@ -1,7 +1,9 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { cloneDeep } from 'lodash';
+import { defultConstant } from 'src/app/config/constants/default.constant';
+import { ManagementService } from 'src/app/sevices/management.service';
 
 @Component({
   selector: 'app-edit',
@@ -10,35 +12,46 @@ import { cloneDeep } from 'lodash';
 })
 export class EditComponent implements OnInit {
   public formAddBook: FormGroup;
-  public tempdata;
+  public tempdata = [];
+  public storeKey = defultConstant.Keys.StoreKey;
+  public cartKey = defultConstant.Keys.CartKey;
 
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data,
+    private _managementService: ManagementService
+  ) {
+    this.tempdata = cloneDeep(this.data)
+   }
 
   ngOnInit() {
-    debugger;
     this.intitForm();
-    
-    this.tempdata = cloneDeep(this.data);
   }
 
   onSubmit(){
-    let newBook = this.formAddBook.value;
     debugger;
-    this.data = this.formAddBook.value;
+    let newBook = this.formAddBook.value;
+    this._managementService.emitTableUpdateEvent(newBook);
+    this.data = cloneDeep(this.tempdata);
+    let store = [];
+    store = JSON.parse(localStorage.getItem(this.storeKey));
+    for(let i = 0; i<store.length;i++){
+      if(store[i].bookid == this.data.bookid){
+        store[i] = cloneDeep(newBook);
+      }
+    }
+    localStorage.setItem(this.storeKey, JSON.stringify(store));
     this.dialogRef.close();
     this.resetForm();
   }
 
   intitForm(){
     this.formAddBook = new FormGroup({
-      bookname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      authorname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      author: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.min(1)]),
       imageurl: new FormControl('', [Validators.required]),
-      createddate: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
       bookid: new FormControl('', Validators.required)
     });
   }
@@ -53,9 +66,9 @@ export class EditComponent implements OnInit {
     });
   }
 
-  onCancel(){
-    debugger;
-    this.data = this.tempdata;
-  }
+  // onCancel(){
+  //   debugger;
+  //   this.data = this.tempdata;
+  // }
 
 }

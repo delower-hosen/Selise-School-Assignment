@@ -11,11 +11,11 @@
           <div fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Book Name</mat-label>
-              <input matInput name="bookName" formControlName="bookname" required>
+              <input matInput name="name" formControlName="name" required>
               <mat-hint>
-                <div class="errorMessage" *ngIf="getFormErrors.bookname.touched && getFormErrors.bookname.invalid">
-                  <small *ngIf="getFormErrors.bookname.errors?.required">This is required</small>
-                  <small *ngIf="getFormErrors.bookname.errors?.minlength">Minimum length 3 or higher</small>
+                <div class="errorMessage" *ngIf="getFormErrors.name.touched && getFormErrors.name.invalid">
+                  <small *ngIf="getFormErrors.name.errors?.required">This is required</small>
+                  <small *ngIf="getFormErrors.name.errors?.minlength">Minimum length 3 or higher</small>
               </div>
               </mat-hint>
             </mat-form-field>
@@ -25,11 +25,11 @@
           <div fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Author Name</mat-label>
-              <input matInput name="authorName" formControlName="authorname" required>
+              <input matInput name="author" formControlName="author" required>
               <mat-hint>
-                <div class="errorMessage" *ngIf="getFormErrors.authorname.touched && getFormErrors.authorname.invalid">
-                  <small *ngIf="getFormErrors.authorname.errors?.required">This is required</small>
-                  <small *ngIf="getFormErrors.authorname.errors?.minlength">Minimum length 3 or higher</small>
+                <div class="errorMessage" *ngIf="getFormErrors.author.touched && getFormErrors.author.invalid">
+                  <small *ngIf="getFormErrors.author.errors?.required">This is required</small>
+                  <small *ngIf="getFormErrors.author.errors?.minlength">Minimum length 3 or higher</small>
               </div>
               </mat-hint>
             </mat-form-field>
@@ -51,12 +51,12 @@
             <div fxFlex="50">
                 <mat-form-field appearance="outline">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="createddate" required>
+                    <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-hint>
-                        <div class="errorMessage" *ngIf="getFormErrors.createddate.touched && getFormErrors.createddate.invalid">
-                          <small *ngIf="getFormErrors.createddate.errors?.required">This is required</small>
+                        <div class="errorMessage" *ngIf="getFormErrors.date.touched && getFormErrors.date.invalid">
+                          <small *ngIf="getFormErrors.date.errors?.required">This is required</small>
                       </div>
                       </mat-hint>
                   </mat-form-field>
@@ -66,7 +66,7 @@
             <div fxFlex="100">
                 <mat-form-field appearance="outline">
                   <mat-label>Image Url</mat-label>
-                  <input matInput name="imageUrl" formControlName="imageurl" required>
+                  <input matInput name="imageurl" formControlName="imageurl" required>
                   
                   <mat-hint>
                     <div class="errorMessage" *ngIf="getFormErrors.imageurl.touched && getFormErrors.imageurl.invalid">

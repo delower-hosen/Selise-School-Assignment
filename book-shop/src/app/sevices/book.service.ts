@@ -5,21 +5,21 @@ import { PagedData } from './../model/paged-data';
 import { BookModel } from './../model/book-model';
 import { Page } from './../model/page';
 // const companyData = require('./../../assets/company.json');
-const Data = JSON.parse(localStorage.getItem('mystore'))?JSON.parse(localStorage.getItem('mystore')):[];
-const companyData = [];
-for(let data of Data){
-  let boo = {
-    "name": data.bookname,
-    "author": data.authorname,
-    "price": data.price,
-    "bookid": data.bookId,
-    "imageurl": data.imageurl,
-    "date": data.createddate
-  };
+const companyData = JSON.parse(localStorage.getItem('mystore'))?JSON.parse(localStorage.getItem('mystore')):[];
+// const companyData = [];
+// for(let data of Data){
+//   let boo = {
+//     "name": data.name,
+//     "author": data.author,
+//     "price": data.price,
+//     "bookid": data.bookid,
+//     "imageurl": data.imageurl,
+//     "date": data.date
+//   };
 
-  companyData.push(boo);
+//   companyData.push(boo);
   
-}
+// }
 
 @Injectable()
 export class MockServerResultsService {

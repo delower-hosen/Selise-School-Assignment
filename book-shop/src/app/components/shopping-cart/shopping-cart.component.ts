@@ -27,7 +27,7 @@ export class ShoppingCartComponent implements OnInit {
     let numberofbooks: number = book.quantity;
     cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
     for(let index = 0; index < cart.length; index++){
-      if(cart[index].bookId == book.bookId){
+      if(cart[index].bookid == book.bookid){
         cart.splice(index,1);
       }
     }
@@ -44,7 +44,7 @@ export class ShoppingCartComponent implements OnInit {
       cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
 
       for(let index = 0; index < cart.length; index++){
-        if(cart[index].bookId == book.bookId){
+        if(cart[index].bookid == book.bookid){
           cart[index].quantity += x;
           flag = cart[index].quantity;
         }
