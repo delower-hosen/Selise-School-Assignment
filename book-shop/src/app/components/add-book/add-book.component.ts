@@ -26,7 +26,7 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      debugger;
+      // debugger;
       let storeKey = defultConstant.Keys.StoreKey;
       let generatedGuid = this.guid();
       let newBook = this.formAddBook.value;

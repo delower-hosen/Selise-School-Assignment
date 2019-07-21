@@ -1,7 +1,7 @@
 
-<div fxLayout="row" fxLayoutGap="32px" class="bookStore">
-  <div class="example-card" *ngFor="let book of books">
-    <mat-card >
+<div fxLayout="row wrap" fxLayoutGap="32px" class="bookStore">
+  <div fxLayoutGap="10px" fxLayout="row wrap" *ngFor="let book of books">
+    <mat-card class="example-card" fxLayoutGap="10px">
       <mat-card-header>
         <div mat-card-avatar [ngStyle]="{ 'background-image': 'url(' + book.imageurl + ')'}" class="example-header-image"></div>
         <mat-card-title>{{book.bookname}}</mat-card-title>
@@ -12,15 +12,6 @@
       <div fxLayout="column">
         <span class="price">Tk. {{book.price}}</span>
         <button class="ss" fxFlexAlign="end" mat-flat-button color="primary" (click)="addToCart(book)">Add To Cart</button>
-      <!-- <ng-template #updateQuantity>
-        <div fxLayout="row wrap" fxLayoutAlign="space-between start">
-          <button mat-flat-button color="primary" (click)="addToCart(book, 1)">+</button>
-          <div>
-            8
-          </div>
-          <button mat-flat-button color="primary">-</button>
-        </div>
-      </ng-template> -->
       </div>
       
     </mat-card>

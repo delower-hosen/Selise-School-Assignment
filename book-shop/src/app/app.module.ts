@@ -24,6 +24,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     NavBarComponent,
     BookManagementComponent,
     ShoppingCartComponent,
+    EditComponent,
   ],
   entryComponents: [
-    AddBookComponent
+    AddBookComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
