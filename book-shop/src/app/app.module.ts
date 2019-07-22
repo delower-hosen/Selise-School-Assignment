@@ -71,7 +71,8 @@ import { EditComponent } from './components/edit/edit.component';
       { path: 'home', component: HomeComponent },
       { path: 'manageproduct', component: BookManagementComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'add-book', component: AddBookComponent}
+      { path: 'add-book', component: AddBookComponent},
+      { path: '**', component: HomeComponent}
     ])
   ],
   providers: [MockServerResultsService],
