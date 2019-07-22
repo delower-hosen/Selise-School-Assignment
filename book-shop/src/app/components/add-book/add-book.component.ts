@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { defultConstant } from './../../config/constants/default.constant'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ManagementService } from 'src/app/sevices/management.service';
 
 
 @Component({
@@ -16,7 +18,9 @@ export class AddBookComponent implements OnInit {
   maxDate = new Date();
   constructor(
     private _toastr: ToastrService,
-    private dialogRef: MatDialogRef<AddBookComponent>
+    private routerCh: Router,
+    // private dialogRef: MatDialogRef<AddBookComponent>,
+    private _managementService: ManagementService
   ) { 
   }
 
@@ -26,7 +30,6 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      // debugger;
       let storeKey = defultConstant.Keys.StoreKey;
       let generatedGuid = this.guid();
       let newBook = this.formAddBook.value;
@@ -39,9 +42,10 @@ export class AddBookComponent implements OnInit {
       Books.push(newBook);
       localStorage.setItem(storeKey, JSON.stringify(Books));
       this.showSuccess();
-      this.dialogRef.close();
+      // this.dialogRef.close();
       this.resetForm();
     }
+    this.routerCh.navigate(['/manageproduct']);
   }
 
   intitForm(){

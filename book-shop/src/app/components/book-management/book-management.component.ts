@@ -33,7 +33,7 @@ export class BookManagementComponent implements OnInit {
     private filterPipe: FilterPipe
   ) {
     this.page.pageNumber = 0;
-    this.page.size = 10;
+    this.page.size = 3;
    }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class BookManagementComponent implements OnInit {
     })
     this.setPage({ offset: 0 });
     this.initDataTable();
-  
+    
   }
 
   updateStore(book){
@@ -73,7 +73,6 @@ export class BookManagementComponent implements OnInit {
   }
 
   delete(book) {
-    debugger;
     let currentCart = [];
     let canBeDeleted: boolean = true;
     currentCart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
@@ -99,7 +98,7 @@ export class BookManagementComponent implements OnInit {
   }
 
   update(row){
-    const dialogRef = this.dialog.open(EditComponent,{
+    const dialogRef = this.dialog.open(EditComponent, {
       data: row
     });
 

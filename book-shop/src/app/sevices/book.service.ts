@@ -1,36 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PagedData } from './../model/paged-data';
 import { BookModel } from './../model/book-model';
 import { Page } from './../model/page';
-// const companyData = require('./../../assets/company.json');
-const companyData = JSON.parse(localStorage.getItem('mystore'))?JSON.parse(localStorage.getItem('mystore')):[];
-// const companyData = [];
-// for(let data of Data){
-//   let boo = {
-//     "name": data.name,
-//     "author": data.author,
-//     "price": data.price,
-//     "bookid": data.bookid,
-//     "imageurl": data.imageurl,
-//     "date": data.date
-//   };
-
-//   companyData.push(boo);
-  
-// }
-
+import { defultConstant } from '../config/constants/default.constant';
+import { ManagementService } from './management.service';
 @Injectable()
 export class MockServerResultsService {
 
+    test: EventEmitter<any> = new EventEmitter();
+    public storeKey = defultConstant.Keys.StoreKey;
+    public companyData = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
+    
+    constructor() {
+
+    }
+    
     /**
      * A method that mocks a paged server response
      * @param page The selected page
      * @returns {any} An observable containing the employee data
      */
     public getResults(page: Page): Observable<PagedData<BookModel>> {
-        return of(companyData).pipe(map(data => this.getPagedData(page)));
+        this.companyData = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
+        return of(this.companyData).pipe(map(data => this.getPagedData(page)));
     }
 
     /**
@@ -40,12 +34,12 @@ export class MockServerResultsService {
      */
     private getPagedData(page: Page): PagedData<BookModel> {
         const pagedData = new PagedData<BookModel>();
-        page.totalElements = companyData.length;
+        page.totalElements = this.companyData.length;
         page.totalPages = page.totalElements / page.size;
         const start = page.pageNumber * page.size;
         const end = Math.min((start + page.size), page.totalElements);
         for (let i = start; i < end; i++){
-            const jsonObj = companyData[i];
+            const jsonObj = this.companyData[i];
             const employee = new BookModel(jsonObj.bookid, jsonObj.name, jsonObj.author, jsonObj.price, jsonObj.imageurl, jsonObj.date);
             pagedData.data.push(employee);
         }
@@ -53,4 +47,4 @@ export class MockServerResultsService {
         return pagedData;
     }
 
-}
+} 
