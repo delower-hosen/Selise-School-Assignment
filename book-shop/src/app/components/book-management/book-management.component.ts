@@ -33,7 +33,7 @@ export class BookManagementComponent implements OnInit {
     private filterPipe: FilterPipe
   ) {
     this.page.pageNumber = 0;
-    this.page.size = 3;
+    this.page.size = 10;
    }
 
   ngOnInit() {

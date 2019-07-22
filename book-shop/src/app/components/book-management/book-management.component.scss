@@ -5,13 +5,11 @@
   }
 
   .searchBar {
-    // border: 1px solid red;
     height: 70px;
     margin: 10px 40px 0px 40px;
   }
 
   .search {
-    // border: 2px solid blue;
     width: 100%;
   }
 
@@ -51,26 +49,6 @@
   }
 
 
-  ::ng-deep .ngx-datatable.material {
-    background: #FFF;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
-  }
-
-  ::ng-deep .empty-row {
-    height: 50px;
-    text-align: left;
-    padding: .5rem 1.2rem;
-    vertical-align: top;
-    border-top: 0;
-  }
-
-  ::ng-deep .loading-row {
-    text-align: left;
-    padding: .5rem 1.2rem;
-    vertical-align: top;
-    border-top: 0;
-  }
-
   ::ng-deep .datatable-header {
     background-color: #E8EAED;
 
@@ -79,26 +57,17 @@
     }
   }
 
-  ::ng-deep .datatable-header-cell {
-    padding: 10px 0 0 10px;
-  }
-
   ::ng-deep .datatable-body-row {
-    border-bottom: 1px solid rgb(240, 235, 235);
+    // border-bottom: 1px solid rgb(240, 235, 235);
 
     &:hover {
       cursor: pointer;
-      background-color: rgb(240, 235, 235);
     }
   }
-
-  ::ng-deep .datatable-body-cell {
-    padding: 15px 0 0 10px;
+  mat-icon{
+    color: gray;
+    &:hover{
+      color: red;
+    }
   }
-
-  ::ng-deep .pages {
-    padding-left: 30px;
-  }
-
-
 }

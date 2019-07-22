@@ -29,7 +29,6 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
     let newBook = this.formAddBook.value;
     this._managementService.emitTableUpdateEvent(newBook);
     this.data = cloneDeep(this.tempdata);
