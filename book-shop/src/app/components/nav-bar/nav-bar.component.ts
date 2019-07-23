@@ -1,29 +1,29 @@
 import { CommonDataService } from './../../services/common-data.service';
 import { defaultConstant } from './../../config/constants/default.constant';
 import { CartService } from '../../services/cart.service';
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
   numberOfBooks: number = 0;
   subscription: Subscription;
-  subscriptionDelete: Subscription;
-  subscriptionChange: Subscription;
+  private _unsubscribeAll: Subject<any>;
   public x: number;
   public cartKey = defaultConstant.Keys.CartKey;
   public selectedTab: string;
-  public href;
+
   constructor(
     private _cartService: CartService,
-    private _router: Router,
     private _commonDataService: CommonDataService
-  ) { }
+  ) {
+    this._unsubscribeAll = new Subject();
+   }
 
   ngOnInit() {
     this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
@@ -32,7 +32,7 @@ export class NavBarComponent implements OnInit {
 
     this.numberOfBooks = this.getQuantity();
 
-    this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => 
+    this._cartService.getNavChangeEmitter().pipe(takeUntil(this._unsubscribeAll)).subscribe(totalPurchase => 
       this.numberOfBooks = this.getQuantity());
   }
 
@@ -52,9 +52,8 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.subscriptionDelete.unsubscribe();
-    this.subscriptionChange.unsubscribe();
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 
 }

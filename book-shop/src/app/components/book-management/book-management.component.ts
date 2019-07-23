@@ -10,6 +10,7 @@ import { defaultConstant } from 'src/app/config/constants/default.constant';
 import { ManagementService } from 'src/app/services/management.service';
 import { cloneDeep } from 'lodash';
 import { EditDatatableComponent } from '../edit-datatable/edit-datatable.component';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-book-management',
   templateUrl: './book-management.component.html',
@@ -20,7 +21,6 @@ export class BookManagementComponent implements OnInit {
   page = new Page();
   rows = new Array<BookModel>();
   temp  = new Array<BookModel>();
-  selected = [];
   public storeKey = defaultConstant.Keys.StoreKey;
   public cartKey = defaultConstant.Keys.CartKey;
 
@@ -32,7 +32,9 @@ export class BookManagementComponent implements OnInit {
     private serverResultsService: ServerResultsService,
     private _managementService: ManagementService,
     private _commonDataService: CommonDataService,
-    private filterPipe: FilterPipe
+    private filterPipe: FilterPipe,
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) {
     this.page.pageNumber = 0;
     this.page.size = 10;
@@ -130,6 +132,15 @@ export class BookManagementComponent implements OnInit {
 
     this.rows = temp;
     this.page.totalElements = this.rows.length;
+  }
+
+  updateQueryParam(gridName: string) {
+    this.router.navigate([], {
+      queryParams: {
+        gridData: gridName
+      },
+      relativeTo: this.activeRoute
+    })
   }
 
 }
