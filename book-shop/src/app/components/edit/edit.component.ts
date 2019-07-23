@@ -2,8 +2,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { cloneDeep } from 'lodash';
-import { defultConstant } from 'src/app/config/constants/default.constant';
-import { ManagementService } from 'src/app/sevices/management.service';
+import { defaultConstant } from 'src/app/config/constants/default.constant';
+import { ManagementService } from 'src/app/services/management.service';
 
 @Component({
   selector: 'app-edit',
@@ -13,8 +13,8 @@ import { ManagementService } from 'src/app/sevices/management.service';
 export class EditComponent implements OnInit {
   public formAddBook: FormGroup;
   public tempdata = [];
-  public storeKey = defultConstant.Keys.StoreKey;
-  public cartKey = defultConstant.Keys.CartKey;
+  public storeKey = defaultConstant.Keys.StoreKey;
+  public cartKey = defaultConstant.Keys.CartKey;
 
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
@@ -64,10 +64,4 @@ export class EditComponent implements OnInit {
       this.intitForm();
     });
   }
-
-  // onCancel(){
-  //   debugger;
-  //   this.data = this.tempdata;
-  // }
-
 }

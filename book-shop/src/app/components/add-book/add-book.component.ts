@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
-import { defultConstant } from './../../config/constants/default.constant'
+import { defaultConstant } from './../../config/constants/default.constant'
 // import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ManagementService } from 'src/app/sevices/management.service';
+import { ManagementService } from 'src/app/services/management.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      let storeKey = defultConstant.Keys.StoreKey;
+      let storeKey = defaultConstant.Keys.StoreKey;
       let generatedGuid = this.guid();
       let newBook = this.formAddBook.value;
       newBook.bookid = generatedGuid;

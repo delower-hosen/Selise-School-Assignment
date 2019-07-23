@@ -1,5 +1,5 @@
-import { defultConstant } from './../../config/constants/default.constant';
-import { CartService } from './../../sevices/cart.service';
+import { defaultConstant } from './../../config/constants/default.constant';
+import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class NavBarComponent implements OnInit {
   subscriptionDelete: Subscription;
   subscriptionChange: Subscription;
   public x: number;
-  public cartKey = defultConstant.Keys.CartKey;
+  public cartKey = defaultConstant.Keys.CartKey;
   public selectedTab: string;
   public href;
   constructor(

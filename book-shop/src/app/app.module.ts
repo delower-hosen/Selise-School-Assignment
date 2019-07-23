@@ -1,4 +1,4 @@
-import { MockServerResultsService } from './sevices/book.service';
+import { MockServerResultsService } from './services/book.service';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';

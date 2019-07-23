@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BookService } from './book.service';
+import { CommonDataService } from './common-data.service';
 
-describe('BookService', () => {
+describe('CommonDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BookService = TestBed.get(BookService);
+    const service: CommonDataService = TestBed.get(CommonDataService);
     expect(service).toBeTruthy();
   });
 });

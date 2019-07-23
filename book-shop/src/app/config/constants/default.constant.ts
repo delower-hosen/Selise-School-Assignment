@@ -1,4 +1,4 @@
-export const defultConstant = {
+export const defaultConstant = {
     Keys: {
         StoreKey: 'mystore',
         CartKey: 'mycart',

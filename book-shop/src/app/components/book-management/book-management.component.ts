@@ -1,13 +1,13 @@
-import { EditComponent } from './../edit/edit.component';
+import { EditComponent } from '../edit/edit.component';
 import { Page } from './../../model/page';
 import { Component, OnInit, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddBookComponent } from '../add-book/add-book.component';
-import { MockServerResultsService } from './../../sevices/book.service'
+import { MockServerResultsService } from '../../services/book.service'
 import { BookModel } from './../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
-import { defultConstant } from 'src/app/config/constants/default.constant';
-import { ManagementService } from 'src/app/sevices/management.service';
+import { defaultConstant } from 'src/app/config/constants/default.constant';
+import { ManagementService } from 'src/app/services/management.service';
 import { cloneDeep } from 'lodash';
 @Component({
   selector: 'app-book-management',
@@ -20,8 +20,8 @@ export class BookManagementComponent implements OnInit {
   rows = new Array<BookModel>();
   temp  = new Array<BookModel>();
   selected = [];
-  public storeKey = defultConstant.Keys.StoreKey;
-  public cartKey = defultConstant.Keys.CartKey;
+  public storeKey = defaultConstant.Keys.StoreKey;
+  public cartKey = defaultConstant.Keys.CartKey;
 
   @ViewChild('updateTemplate') updateTemplate: TemplateRef<any>;
   datatableColumns: any;

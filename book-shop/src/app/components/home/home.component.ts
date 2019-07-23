@@ -1,7 +1,7 @@
-import { CartService } from './../../sevices/cart.service';
+import { CommonDataService } from './../../services/common-data.service';
+import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { defultConstant } from './../../config/constants/default.constant';
-import {FormControl} from '@angular/forms';
+import { defaultConstant } from './../../config/constants/default.constant';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,13 +9,14 @@ import {FormControl} from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   public books: Array<any> = [];
-  public storeKey = defultConstant.Keys.StoreKey;
-  public cartKey = defultConstant.Keys.CartKey;
-  public quantityKey = defultConstant.Keys.QuantityKey;
+  public storeKey = defaultConstant.Keys.StoreKey;
+  public cartKey = defaultConstant.Keys.CartKey;
+  public quantityKey = defaultConstant.Keys.QuantityKey;
   public bookItems: number = 0;
   public changeQuantity: number;
   constructor(
-    private _cartService: CartService
+    private _cartService: CartService,
+    private _commonDataService: CommonDataService
   ) { }
 
   ngOnInit() {
@@ -23,30 +24,29 @@ export class HomeComponent implements OnInit {
   }
 
   getBooks(){
-    this.books = JSON.parse(localStorage.getItem(this.storeKey));
+    this.books = this._commonDataService.getData(this.storeKey);
   }
 
   addToCart(book: any){
     this.bookItems = 0;
-    let previousBooks: Array<any> = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
+    let previousBooks: Array<any> = this._commonDataService.getData(this.cartKey);
     let doesExist: boolean = false;
     book.isChecked = true;
     for(let previousbook of previousBooks){
       if(previousbook.bookid == book.bookid){
         doesExist = true;
         previousbook.quantity++;
-        localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
+        this._commonDataService.setData(this.cartKey, previousBooks);
       }
       this.bookItems += previousbook.quantity;
     }
     if(!doesExist){
       previousBooks.push(book);
       book.quantity = 1;
-      localStorage.setItem(this.cartKey, JSON.stringify(previousBooks));
+      this._commonDataService.setData(this.cartKey, previousBooks);
       this.bookItems += book.quantity;
       this._cartService.emitNavChangeEvent(this.bookItems);
     }
-    // this._cartService.emitNavChangeEvent(this.bookItems);
   }
 
 }

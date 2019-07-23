@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { defultConstant } from './../../config/constants/default.constant';
-import { CartService } from './../../sevices/cart.service';
+import { defaultConstant } from './../../config/constants/default.constant';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,7 +9,7 @@ import { CartService } from './../../sevices/cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   public books: Array<any> = [];
-  public cartKey = defultConstant.Keys.CartKey;
+  public cartKey = defaultConstant.Keys.CartKey;
   constructor(
     private _cartService: CartService
   ) { }

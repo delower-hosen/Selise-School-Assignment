@@ -1,16 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PagedData } from './../model/paged-data';
-import { BookModel } from './../model/book-model';
-import { Page } from './../model/page';
-import { defultConstant } from '../config/constants/default.constant';
+import { PagedData } from '../model/paged-data';
+import { BookModel } from '../model/book-model';
+import { Page } from '../model/page';
+import { defaultConstant } from '../config/constants/default.constant';
 import { ManagementService } from './management.service';
 @Injectable()
 export class MockServerResultsService {
 
     test: EventEmitter<any> = new EventEmitter();
-    public storeKey = defultConstant.Keys.StoreKey;
+    public storeKey = defaultConstant.Keys.StoreKey;
     public companyData = JSON.parse(localStorage.getItem(this.storeKey))?JSON.parse(localStorage.getItem(this.storeKey)):[];
     
     constructor() {
