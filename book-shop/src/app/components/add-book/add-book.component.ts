@@ -1,12 +1,10 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { MatSnackBar} from '@angular/material/snack-bar';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { defaultConstant } from './../../config/constants/default.constant'
-// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ManagementService } from 'src/app/services/management.service';
-
+import { CommonDataService } from 'src/app/services/common-data.service';
 
 @Component({
   selector: 'app-add-book',
@@ -15,12 +13,12 @@ import { ManagementService } from 'src/app/services/management.service';
 })
 export class AddBookComponent implements OnInit {
   public formAddBook: FormGroup;
-  maxDate = new Date();
+  maxDate = defaultConstant.Date.CurrentDate;
+
   constructor(
     private _toastr: ToastrService,
     private routerCh: Router,
-    // private dialogRef: MatDialogRef<AddBookComponent>,
-    private _managementService: ManagementService
+    private _commonDataService: CommonDataService
   ) { 
   }
 
@@ -31,21 +29,20 @@ export class AddBookComponent implements OnInit {
   onSubmit(){
     if(this.isBookInfoValid()){
       let storeKey = defaultConstant.Keys.StoreKey;
-      let generatedGuid = this.guid();
+      let generatedGuid = this.generateGuid();
       let newBook = this.formAddBook.value;
       newBook.bookid = generatedGuid;
-      console.log(newBook);
+
       let Books: Array<any> = [];
-      if(JSON.parse(localStorage.getItem(storeKey))){
-        Books = JSON.parse(localStorage.getItem(storeKey));
-      }
+      let currentBooks = this._commonDataService.getData(storeKey);
+      Books = currentBooks? currentBooks : [];
       Books.push(newBook);
-      localStorage.setItem(storeKey, JSON.stringify(Books));
+      
+      this._commonDataService.setData(storeKey, Books);
       this.showSuccess();
-      // this.dialogRef.close();
       this.resetForm();
     }
-    this.routerCh.navigate(['/manageproduct']);
+    this.routerCh.navigate(['/manage-book']);
   }
 
   intitForm(){
@@ -82,7 +79,7 @@ export class AddBookComponent implements OnInit {
     });
   }
 
-  guid() {
+  generateGuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);

@@ -1,14 +1,15 @@
-import { EditComponent } from '../edit/edit.component';
+import { CommonDataService } from 'src/app/services/common-data.service';
 import { Page } from './../../model/page';
 import { Component, OnInit, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddBookComponent } from '../add-book/add-book.component';
-import { MockServerResultsService } from '../../services/book.service'
+import { ServerResultsService } from '../../services/serverResults.service'
 import { BookModel } from './../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
 import { ManagementService } from 'src/app/services/management.service';
 import { cloneDeep } from 'lodash';
+import { EditDatatableComponent } from '../edit-datatable/edit-datatable.component';
 @Component({
   selector: 'app-book-management',
   templateUrl: './book-management.component.html',
@@ -28,8 +29,9 @@ export class BookManagementComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private serverResultsService: MockServerResultsService,
+    private serverResultsService: ServerResultsService,
     private _managementService: ManagementService,
+    private _commonDataService: CommonDataService,
     private filterPipe: FilterPipe
   ) {
     this.page.pageNumber = 0;
@@ -49,13 +51,13 @@ export class BookManagementComponent implements OnInit {
   updateStore(book){
     console.log(this.rows);
     
-    for(let i = 0; i<this.rows.length;i++){
-      if(this.rows[i].bookid == book.bookid){
-        this.rows[i] = book;
+    for(let index = 0; index < this.rows.length; index++){
+      if(this.rows[index].bookid == book.bookid){
+        this.rows[index] = book;
         this.rows = [...this.rows];
       }
     }
-    console.log(this.rows);
+
     this.page.totalElements = this.rows.length;
     
   }
@@ -75,7 +77,7 @@ export class BookManagementComponent implements OnInit {
   delete(book) {
     let currentCart = [];
     let canBeDeleted: boolean = true;
-    currentCart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
+    currentCart = this._commonDataService.getData(this.cartKey);
 
     for(let cart of currentCart){
       if(cart.bookid == book.bookid) canBeDeleted = false;
@@ -85,20 +87,20 @@ export class BookManagementComponent implements OnInit {
     }
     
     if(canBeDeleted){
-    for(let index = 0; index<this.rows.length;index++){
+    for(let index = 0; index < this.rows.length; index++){
       if(this.rows[index].bookid == book.bookid){
         this.rows.splice(index, 1);
         this.rows = [...this.rows];
       }
     }
     this.page.totalElements = this.rows.length;
-    localStorage.setItem(this.storeKey, JSON.stringify(this.rows));
+    this._commonDataService.setData(this.storeKey, this.rows);
   }
 
   }
 
   update(row){
-    const dialogRef = this.dialog.open(EditComponent, {
+    const dialogRef = this.dialog.open(EditDatatableComponent, {
       data: row
     });
 
@@ -128,16 +130,6 @@ export class BookManagementComponent implements OnInit {
 
     this.rows = temp;
     this.page.totalElements = this.rows.length;
-  }
-
-  openModal(){
-    this.dialog.open(AddBookComponent, {
-      panelClass: 'productModal'
-    })
-      .afterClosed()
-      .subscribe(result=>{
-        console.log(result);
-      });
   }
 
 }

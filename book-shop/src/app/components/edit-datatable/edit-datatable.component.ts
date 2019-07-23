@@ -4,22 +4,24 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { cloneDeep } from 'lodash';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
 import { ManagementService } from 'src/app/services/management.service';
+import { CommonDataService } from 'src/app/services/common-data.service';
 
 @Component({
   selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  templateUrl: './edit-datatable.component.html',
+  styleUrls: ['./edit-datatable.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditDatatableComponent implements OnInit {
   public formAddBook: FormGroup;
   public tempdata = [];
   public storeKey = defaultConstant.Keys.StoreKey;
   public cartKey = defaultConstant.Keys.CartKey;
 
   constructor(
-    public dialogRef: MatDialogRef<EditComponent>,
+    public dialogRef: MatDialogRef<EditDatatableComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private _managementService: ManagementService
+    private _managementService: ManagementService,
+    private _commonDataService: CommonDataService
   ) {
     this.tempdata = cloneDeep(this.data)
    }
@@ -33,13 +35,13 @@ export class EditComponent implements OnInit {
     this._managementService.emitTableUpdateEvent(newBook);
     this.data = cloneDeep(this.tempdata);
     let store = [];
-    store = JSON.parse(localStorage.getItem(this.storeKey));
+    store = this._commonDataService.getData(this.storeKey);
     for(let i = 0; i<store.length;i++){
       if(store[i].bookid == this.data.bookid){
         store[i] = cloneDeep(newBook);
       }
     }
-    localStorage.setItem(this.storeKey, JSON.stringify(store));
+    this._commonDataService.setData(this.storeKey, store);
     this.dialogRef.close();
     this.resetForm();
   }

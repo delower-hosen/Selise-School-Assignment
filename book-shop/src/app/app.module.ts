@@ -1,9 +1,9 @@
-import { MockServerResultsService } from './services/book.service';
+import { EditDatatableComponent } from './components/edit-datatable/edit-datatable.component';
+import { ServerResultsService } from './services/serverResults.service';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +24,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +33,11 @@ import { EditComponent } from './components/edit/edit.component';
     NavBarComponent,
     BookManagementComponent,
     ShoppingCartComponent,
-    EditComponent,
+    EditDatatableComponent
   ],
   entryComponents: [
     AddBookComponent,
-    EditComponent
+    EditDatatableComponent
   ],
   imports: [
     BrowserModule,
@@ -69,13 +68,13 @@ import { EditComponent } from './components/edit/edit.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'manageproduct', component: BookManagementComponent },
+      { path: 'manage-book', component: BookManagementComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'add-book', component: AddBookComponent},
       { path: '**', component: HomeComponent}
     ])
   ],
-  providers: [MockServerResultsService],
+  providers: [ServerResultsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

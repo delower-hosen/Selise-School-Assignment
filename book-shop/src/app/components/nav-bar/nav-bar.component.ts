@@ -1,3 +1,4 @@
+import { CommonDataService } from './../../services/common-data.service';
 import { defaultConstant } from './../../config/constants/default.constant';
 import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,40 +21,34 @@ export class NavBarComponent implements OnInit {
   public href;
   constructor(
     private _cartService: CartService,
-    private _router: Router
+    private _router: Router,
+    private _commonDataService: CommonDataService
   ) { }
 
   ngOnInit() {
     this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
       this.deleteBooks(deletedbooks);
     });
-    // this._cartService.getChangeOfCartQuantity().subscribe(response=>{
-    //   this.numberOfBooks = this.getQuantity();
-    // })
+
     this.numberOfBooks = this.getQuantity();
+
     this.subscription = this._cartService.getNavChangeEmitter().subscribe(totalPurchase => 
       this.numberOfBooks = this.getQuantity());
   }
-  // selectedNavItem(totalPurchase: number){
-  //   this.numberOfBooks = totalPurchase;
-  // }
+
   deleteBooks(quantity: number){
     this.numberOfBooks -= 1;
   }
 
   getQuantity(){
     let cart: Array<any> = [];
-    cart = JSON.parse(localStorage.getItem(this.cartKey))?JSON.parse(localStorage.getItem(this.cartKey)):[];
-    // let total: number = 0;
-    // for(let c of cart){
-    //   total += 1;
-    // }
+    cart = this._commonDataService.getData(this.cartKey);
+    cart = cart? cart : [];
     return cart.length;
   }
 
   selectTab(tab: any){
     this.selectedTab = tab;
-    // debugger;
   }
 
   ngOnDestroy() {

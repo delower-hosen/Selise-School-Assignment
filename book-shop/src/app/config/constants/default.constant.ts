@@ -3,5 +3,8 @@ export const defaultConstant = {
         StoreKey: 'mystore',
         CartKey: 'mycart',
         QuantityKey: 'quatity'
+    },
+    Date: {
+        CurrentDate: new Date()
     }
 }
