@@ -1,3 +1,4 @@
+import { ManagementService } from 'src/app/services/management.service';
 import { Component, OnInit } from '@angular/core';
 import { defaultConstant } from './../../config/constants/default.constant';
 import { CartService } from '../../services/cart.service';
@@ -11,14 +12,31 @@ import { CommonDataService } from 'src/app/services/common-data.service';
 export class ShoppingCartComponent implements OnInit {
   public books: Array<any> = [];
   public cartKey = defaultConstant.Keys.CartKey;
+  public storeKey = defaultConstant.Keys.StoreKey;
   constructor(
     private _cartService: CartService,
-    private _commonDataService: CommonDataService
+    private _commonDataService: CommonDataService,
+    private _managementService: ManagementService
   ) { }
 
   ngOnInit() {
+    this._managementService.getTableUpdateEvent().subscribe(book => {
+      this.updateCart(book);
+    })
     this.getBooks();
+  }
 
+  updateCart(book: any){
+    let Cart = [];
+    Cart = this._commonDataService.getData(this.cartKey);
+    for(let index = 0; index < Cart.length; index++){
+      if(Cart[index].bookid == book.bookid){
+        let temp = Cart[index].quantity;
+        Cart[index] = book;
+        Cart[index].quantity = temp;
+      }
+    }
+    this._commonDataService.setData(this.cartKey, Cart);
   }
 
   getBooks(){
