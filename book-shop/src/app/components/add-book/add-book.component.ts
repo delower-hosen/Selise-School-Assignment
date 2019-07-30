@@ -38,6 +38,9 @@ export class AddBookComponent implements OnInit {
       Books = currentBooks? currentBooks : [];
       Books.push(newBook);
       
+      this._commonDataService.postBook(newBook).subscribe((res) =>{
+        console.log(res);
+      })
       this._commonDataService.setData(storeKey, Books);
       this.showSuccess();
       this.resetForm();

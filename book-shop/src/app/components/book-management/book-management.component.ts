@@ -41,7 +41,6 @@ export class BookManagementComponent implements OnInit {
    }
 
   ngOnInit() {
-    debugger;
     this._managementService.getTableUpdateEvent().subscribe(book=>{
       this.updateStore(book);
     })

@@ -24,6 +24,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
