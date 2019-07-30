@@ -12,7 +12,7 @@ export class ServerResultsService {
     test: EventEmitter<any> = new EventEmitter();
     public storeKey = defaultConstant.Keys.StoreKey;
     public Data = [];
-    
+    public fakeData = [];
     constructor(
         private _commonDataService: CommonDataService
     ) {
@@ -20,6 +20,11 @@ export class ServerResultsService {
     }
 
     public getResults(page: Page): Observable<PagedData<BookModel>> {
+        debugger;
+        this._commonDataService.getAllBooks().subscribe(res=>{
+            this.fakeData = res;
+            console.log(this.fakeData);
+        })
         this.Data = this._commonDataService.getData(this.storeKey);
         return of(this.Data).pipe(map(data => this.getPagedData(page)));
     }

@@ -2,6 +2,9 @@ import { BookModel } from './../model/book-model';
 import { Injectable } from '@angular/core';
 import { debug } from 'util';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +26,10 @@ export class CommonDataService {
   }
 
   postBook(newbook: BookModel){
-    let book = {};
-    book['name'] = newbook.name;
-    book['author'] = newbook.author;
-    book['price'] = newbook.price;
-    book['imageurl'] = newbook.imageurl;
-    book['date'] = newbook.date;
-    debugger;
-    return this._http.post<any>(this.baseURL, book);
+    return this._http.post<any>(this.baseURL, newbook);
+  }
+
+  getAllBooks(): Observable<any>{
+    return this._http.get<any>(this.baseURL).pipe(map(res => res.JsonPipe));
   }
 }
