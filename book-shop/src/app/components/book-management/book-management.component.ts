@@ -95,12 +95,17 @@ export class BookManagementComponent implements OnInit {
       }
     }
     this.page.totalElements = this.rows.length;
+    this._commonDataService.deleteBook(book._id).subscribe(res=>{
+      debugger;
+      console.log(res);
+    })
     this._commonDataService.setData(this.storeKey, this.rows);
   }
 
   }
 
   update(row){
+    debugger;
     const dialogRef = this.dialog.open(EditDatatableComponent, {
       data: row
     });
@@ -115,8 +120,9 @@ export class BookManagementComponent implements OnInit {
   setPage(pageInfo){
     this.page.pageNumber = pageInfo.offset;
     this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-      this.page = pagedData.page;
-      this.rows = pagedData.data;
+      debugger;
+      this.page = pagedData['page'];
+      this.rows = pagedData['data'];
       this.temp = [...this.rows];
     });
   }
@@ -131,15 +137,6 @@ export class BookManagementComponent implements OnInit {
 
     this.rows = temp;
     this.page.totalElements = this.rows.length;
-  }
-
-  updateQueryParam(gridName: string) {
-    this.router.navigate([], {
-      queryParams: {
-        gridData: gridName
-      },
-      relativeTo: this.activeRoute
-    })
   }
 
 }

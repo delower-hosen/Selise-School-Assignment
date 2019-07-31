@@ -39,13 +39,13 @@ export class AddBookComponent implements OnInit {
       Books.push(newBook);
       
       this._commonDataService.postBook(newBook).subscribe((res) =>{
-        console.log(res);
-      })
+        this.routerCh.navigate(['/manage-book']);
+      });
+      
       this._commonDataService.setData(storeKey, Books);
       this.showSuccess();
       this.resetForm();
     }
-    this.routerCh.navigate(['/manage-book']);
   }
 
   intitForm(){

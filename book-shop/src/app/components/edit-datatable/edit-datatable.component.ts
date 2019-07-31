@@ -31,6 +31,7 @@ export class EditDatatableComponent implements OnInit {
   }
 
   onSubmit(){
+    debugger;
     let newBook = this.formAddBook.value;
     this._managementService.emitTableUpdateEvent(newBook);
     this.data = cloneDeep(this.tempdata);
@@ -53,7 +54,8 @@ export class EditDatatableComponent implements OnInit {
       price: new FormControl('', [Validators.required, Validators.min(1)]),
       imageurl: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
-      bookid: new FormControl('', Validators.required)
+      bookid: new FormControl('', Validators.required),
+      _id: new FormControl('', Validators.required),
     });
   }
 

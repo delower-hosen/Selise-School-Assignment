@@ -19,14 +19,13 @@ export class ServerResultsService {
 
     }
 
-    public getResults(page: Page): Observable<PagedData<BookModel>> {
-        debugger;
-        this._commonDataService.getAllBooks().subscribe(res=>{
-            this.fakeData = res;
-            console.log(this.fakeData);
-        })
-        this.Data = this._commonDataService.getData(this.storeKey);
-        return of(this.Data).pipe(map(data => this.getPagedData(page)));
+    public getResults(page: Page) {
+        return new Observable(observer =>{
+            this._commonDataService.getAllBooks().subscribe(res=>{
+                this.Data = res;
+                observer.next(this.getPagedData(page));
+            })
+        });
     }
 
     private getPagedData(page: Page): PagedData<BookModel> {
@@ -37,8 +36,8 @@ export class ServerResultsService {
         const end = Math.min((start + page.size), page.totalElements);
         for (let i = start; i < end; i++){
             const jsonObj = this.Data[i];
-            const employee = new BookModel(jsonObj.bookid, jsonObj.name, jsonObj.author, jsonObj.price, jsonObj.imageurl, jsonObj.date);
-            pagedData.data.push(employee);
+            const book = new BookModel(jsonObj.bookid, jsonObj.name, jsonObj.author, jsonObj.price, jsonObj.imageurl, jsonObj.date, jsonObj._id);
+            pagedData.data.push(book);
         }
         pagedData.page = page;
         return pagedData;

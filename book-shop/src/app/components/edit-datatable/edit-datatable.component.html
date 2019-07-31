@@ -17,6 +17,13 @@
             </div>
             <div fxFlex="100">
               <mat-form-field appearance="outline">
+                <mat-label>_id</mat-label>
+                <input matInput name="_id" formControlName="_id" [(ngModel)]="tempdata._id" [readonly]='true'>
+              </mat-form-field>
+             
+            </div>
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
                 <mat-label>Book Name</mat-label>
                 <input matInput name="name" [(ngModel)]="tempdata.name" formControlName="name" required>
                 <mat-hint>

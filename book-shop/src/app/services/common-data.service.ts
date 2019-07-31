@@ -4,13 +4,14 @@ import { debug } from 'util';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonDataService {
   public baseURL = 'http://localhost:3000/api/books';
+  public data = [];
+  public fakeData = [];
   constructor(
     private _http: HttpClient
   ) { }
@@ -25,11 +26,23 @@ export class CommonDataService {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
-  postBook(newbook: BookModel){
+  postBook(newbook: BookModel): Observable<any>{
+    debugger;
     return this._http.post<any>(this.baseURL, newbook);
   }
 
   getAllBooks(): Observable<any>{
-    return this._http.get<any>(this.baseURL).pipe(map(res => res.JsonPipe));
+    return this._http.get<any>(this.baseURL);
   }
+
+  deleteBook(id: string): Observable<any>{
+    debugger;
+    let url = 'http://localhost:3000/api/books/' + id;
+    return this._http.delete<any>(url);
+  }
+
+  // updateBook(id: string): Observable<any> {
+  //   let url = 'http://localhost:3000/api/books/' + id;
+  //   return this._http.put<any>(url);
+  // }
 }
