@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
 import { ManagementService } from 'src/app/services/management.service';
 import { CommonDataService } from 'src/app/services/common-data.service';
+import { log } from 'util';
 
 @Component({
   selector: 'app-edit',
@@ -33,6 +34,9 @@ export class EditDatatableComponent implements OnInit {
   onSubmit(){
     debugger;
     let newBook = this.formAddBook.value;
+    this._commonDataService.updateBook(newBook).subscribe(res=>{
+      console.log(res);
+    })
     this._managementService.emitTableUpdateEvent(newBook);
     this.data = cloneDeep(this.tempdata);
     let store = [];

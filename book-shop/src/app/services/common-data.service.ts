@@ -36,13 +36,12 @@ export class CommonDataService {
   }
 
   deleteBook(id: string): Observable<any>{
-    debugger;
     let url = 'http://localhost:3000/api/books/' + id;
     return this._http.delete<any>(url);
   }
 
-  // updateBook(id: string): Observable<any> {
-  //   let url = 'http://localhost:3000/api/books/' + id;
-  //   return this._http.put<any>(url);
-  // }
+  updateBook(newbook: any): Observable<any> {
+    let url = 'http://localhost:3000/api/books/' + newbook._id;
+    return this._http.put<any>(url, newbook);
+  }
 }

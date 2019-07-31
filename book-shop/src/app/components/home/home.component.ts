@@ -24,7 +24,10 @@ export class HomeComponent implements OnInit {
   }
 
   getBooks(){
-    this.books = this._commonDataService.getData(this.storeKey);
+    // this.books = this._commonDataService.getData(this.storeKey);
+    this._commonDataService.getAllBooks().subscribe(res=>{
+      this.books = res;
+    })
   }
 
   addToCart(book: any){
