@@ -32,23 +32,14 @@ export class EditDatatableComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
     let newBook = this.formAddBook.value;
     this._commonDataService.updateBook(newBook).subscribe(res=>{
       console.log(res);
-    })
-    this._managementService.emitTableUpdateEvent(newBook);
-    this.data = cloneDeep(this.tempdata);
-    let store = [];
-    store = this._commonDataService.getData(this.storeKey);
-    for(let i = 0; i<store.length;i++){
-      if(store[i].bookid == this.data.bookid){
-        store[i] = cloneDeep(newBook);
-      }
-    }
-    this._commonDataService.setData(this.storeKey, store);
-    this.dialogRef.close();
-    this.resetForm();
+      this._managementService.emitTableUpdateEvent(newBook);
+      this.dialogRef.close();
+      this.resetForm();
+    });
+    
   }
 
   intitForm(){

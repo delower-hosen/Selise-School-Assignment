@@ -20,7 +20,7 @@ export class BookManagementComponent implements OnInit {
 
   page = new Page();
   rows = new Array<BookModel>();
-  temp  = new Array<BookModel>();
+  temp = new Array<BookModel>();
   public storeKey = defaultConstant.Keys.StoreKey;
   public cartKey = defaultConstant.Keys.CartKey;
 
@@ -38,39 +38,37 @@ export class BookManagementComponent implements OnInit {
   ) {
     this.page.pageNumber = 0;
     this.page.size = 10;
-   }
+  }
 
   ngOnInit() {
-    this._managementService.getTableUpdateEvent().subscribe(book=>{
+    this._managementService.getTableUpdateEvent().subscribe(book => {
       this.updateStore(book);
     })
     this.setPage({ offset: 0 });
     this.initDataTable();
-    
+
   }
 
-  updateStore(book){
-    console.log(this.rows);
-    
-    for(let index = 0; index < this.rows.length; index++){
-      if(this.rows[index].bookid == book.bookid){
+  updateStore(book) {
+    for (let index = 0; index < this.rows.length; index++) {
+      if (this.rows[index].bookid == book.bookid) {
         this.rows[index] = book;
         this.rows = [...this.rows];
       }
     }
 
     this.page.totalElements = this.rows.length;
-    
+
   }
 
   initDataTable() {
     this.datatableColumns = [
-      {name:'Name'},
-      {name:'Author'},
-      {name:'Price'}, 
+      { name: 'Name' },
+      { name: 'Author' },
+      { name: 'Price' },
       {
         name: '',
-        cellTemplate: this.updateTemplate 
+        cellTemplate: this.updateTemplate
       }
     ]
   }
@@ -80,44 +78,41 @@ export class BookManagementComponent implements OnInit {
     let canBeDeleted: boolean = true;
     currentCart = this._commonDataService.getData(this.cartKey);
 
-    for(let cart of currentCart){
-      if(cart.bookid == book.bookid) canBeDeleted = false;
+    for (let cart of currentCart) {
+      if (cart.bookid == book.bookid) canBeDeleted = false;
     }
-    if(!canBeDeleted){
+    if (!canBeDeleted) {
       alert("Can't be deleted! This is in shopping cart!")
     }
-    
-    if(canBeDeleted){
-    for(let index = 0; index < this.rows.length; index++){
-      if(this.rows[index].bookid == book.bookid){
-        this.rows.splice(index, 1);
-        this.rows = [...this.rows];
+
+    if (canBeDeleted) {
+      for (let index = 0; index < this.rows.length; index++) {
+        if (this.rows[index].bookid == book.bookid) {
+          this.rows.splice(index, 1);
+          this.rows = [...this.rows];
+        }
       }
+      this.page.totalElements = this.rows.length;
+      this._commonDataService.deleteBook(book._id).subscribe(res => {
+        console.log(res);
+      });
     }
-    this.page.totalElements = this.rows.length;
-    this._commonDataService.deleteBook(book._id).subscribe(res=>{
-      debugger;
-      console.log(res);
-    })
-    this._commonDataService.setData(this.storeKey, this.rows);
-  }
 
   }
 
-  update(row){
-    debugger;
+  update(row) {
     const dialogRef = this.dialog.open(EditDatatableComponent, {
       data: row
     });
 
-    dialogRef.afterClosed().subscribe(result=> {
+    dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      
+
     });
-  
+
   }
 
-  setPage(pageInfo){
+  setPage(pageInfo) {
     this.page.pageNumber = pageInfo.offset;
     this.serverResultsService.getResults(this.page).subscribe(pagedData => {
       debugger;
@@ -130,7 +125,7 @@ export class BookManagementComponent implements OnInit {
   updateFilter(event) {
     const searchValue = event.target.value.toLowerCase();
 
-    const temp = this.temp.filter(function(book) {
+    const temp = this.temp.filter(function (book) {
       let matchedBook = book.name.toLowerCase().indexOf(searchValue) !== -1;
       return matchedBook;
     });

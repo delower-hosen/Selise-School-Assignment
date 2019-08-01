@@ -28,23 +28,15 @@ export class AddBookComponent implements OnInit {
 
   onSubmit(){
     if(this.isBookInfoValid()){
-      let storeKey = defaultConstant.Keys.StoreKey;
       let generatedGuid = this.generateGuid();
       let newBook = this.formAddBook.value;
       newBook.bookid = generatedGuid;
-
-      let Books: Array<any> = [];
-      let currentBooks = this._commonDataService.getData(storeKey);
-      Books = currentBooks? currentBooks : [];
-      Books.push(newBook);
       
       this._commonDataService.postBook(newBook).subscribe((res) =>{
         this.routerCh.navigate(['/manage-book']);
+        this.showSuccess();
+        this.resetForm();
       });
-      
-      this._commonDataService.setData(storeKey, Books);
-      this.showSuccess();
-      this.resetForm();
     }
   }
 
