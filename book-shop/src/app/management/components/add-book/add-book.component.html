@@ -1,8 +1,8 @@
-<div fxFlexAlign="center start" fxLayout="column">
+<div  fxFlexAlign="center start" fxLayout="column">
     <div class="card" fxFlexAlign="center">
         <div fxLayout="column" class="header">
           <div class="title">
-            <mat-card-title>Update Book</mat-card-title>
+            <mat-card-title>Add Book</mat-card-title>
           </div>
         </div>
         <form [formGroup]="formAddBook" (ngSubmit)="onSubmit()" >
@@ -10,22 +10,8 @@
   
             <div fxFlex="100">
               <mat-form-field appearance="outline">
-                <mat-label>Book Id</mat-label>
-                <input matInput name="bookId" formControlName="bookid" [(ngModel)]="tempdata.bookid" [readonly]='true'>
-              </mat-form-field>
-             
-            </div>
-            <div fxFlex="100">
-              <mat-form-field appearance="outline">
-                <mat-label>_id</mat-label>
-                <input matInput name="_id" formControlName="_id" [(ngModel)]="tempdata._id" [readonly]='true'>
-              </mat-form-field>
-             
-            </div>
-            <div fxFlex="100">
-              <mat-form-field appearance="outline">
                 <mat-label>Book Name</mat-label>
-                <input matInput name="name" [(ngModel)]="tempdata.name" formControlName="name" required>
+                <input matInput name="name" formControlName="name" required>
                 <mat-hint>
                   <div class="errorMessage" *ngIf="getFormErrors.name.touched && getFormErrors.name.invalid">
                     <small *ngIf="getFormErrors.name.errors?.required">This is required</small>
@@ -39,7 +25,7 @@
             <div fxFlex="100">
               <mat-form-field appearance="outline">
                 <mat-label>Author Name</mat-label>
-                <input matInput name="authorName" formControlName="author" [(ngModel)]="tempdata.author" required>
+                <input matInput name="author" formControlName="author" required>
                 <mat-hint>
                   <div class="errorMessage" *ngIf="getFormErrors.author.touched && getFormErrors.author.invalid">
                     <small *ngIf="getFormErrors.author.errors?.required">This is required</small>
@@ -53,7 +39,7 @@
               <div fxFlex="49">
                 <mat-form-field appearance="outline">
                   <mat-label>Price</mat-label>
-                  <input matInput name="price" type="number" formControlName="price" [(ngModel)]="tempdata.price" required>
+                  <input matInput name="price" type="number" formControlName="price" required>
                   <mat-hint>
                     <div class="errorMessage" *ngIf="getFormErrors.price.touched && getFormErrors.price.invalid">
                       <small *ngIf="getFormErrors.price.errors?.required">This is required</small>
@@ -65,7 +51,7 @@
               <div fxFlex="50">
                   <mat-form-field appearance="outline">
                       <mat-label>Choose a date</mat-label>
-                      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date" [(ngModel)]="tempdata.date" required>
+                      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date" required>
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                       <mat-hint>
@@ -80,7 +66,7 @@
               <div fxFlex="100">
                   <mat-form-field appearance="outline">
                     <mat-label>Image Url</mat-label>
-                    <input matInput name="imageurl" formControlName="imageurl" [(ngModel)]="tempdata.imageurl" required>
+                    <input matInput name="imageurl" formControlName="imageurl" required>
                     
                     <mat-hint>
                       <div class="errorMessage" *ngIf="getFormErrors.imageurl.touched && getFormErrors.imageurl.invalid">
@@ -94,10 +80,10 @@
   
           <div fxLayout="row wrap" fxLayoutAlign="space-between start">
             <div>
-                <button mat-raised-button type="button" mat-dialog-close="yes">Cancel</button>
+                <button mat-raised-button type="button" routerLink='/manage-book' mat-dialog-close="yes">Cancel</button>
             </div>
             <div>
-                <button mat-flat-button [disabled]="formAddBook.invalid" type="submit" (click)="onSubmit()" color="primary">Update</button>
+                <button mat-flat-button [disabled]="formAddBook.invalid" type="submit" color="primary">Submit</button>
             </div>
           </div>
         </form>

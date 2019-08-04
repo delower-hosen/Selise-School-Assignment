@@ -1,0 +1,46 @@
+<div  fxFlexAlign="center start" fxLayout="column">
+    <div class="card" fxFlexAlign="center">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+          <div fxLayout="column" fxLayoutGap="5px">
+  
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>email</mat-label>
+                <input matInput name="email" formControlName="email" required>
+                <mat-hint>
+                  <div class="errorMessage" *ngIf="getFormErrors.email.touched && getFormErrors.email.invalid">
+                    <small *ngIf="getFormErrors.email.errors?.required">This is required</small>
+                    <small *ngIf="getFormErrors.email.errors?.email">Invalid email</small>
+                    <small *ngIf="getFormErrors.email.errors?.minlength">Minimum length 3 or higher</small>
+                </div>
+                </mat-hint>
+              </mat-form-field>
+             
+            </div>
+  
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input matInput type="password" name="password" formControlName="password" required>
+                <mat-hint>
+                  <div class="errorMessage" *ngIf="getFormErrors.password.touched && getFormErrors.password.invalid">
+                    <small *ngIf="getFormErrors.password.errors?.required">This is required</small>
+                    <small *ngIf="getFormErrors.password.errors?.minlength">Minimum length 5 or higher</small>
+                </div>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+
+          </div>
+  
+          <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+            <!-- <div>
+                <button mat-raised-button type="button">Cancel</button>
+            </div> -->
+            <div>
+                <button mat-flat-button [disabled]="loginForm.invalid" type="submit" color="primary">Log in</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>

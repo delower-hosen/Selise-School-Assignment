@@ -1,0 +1,108 @@
+<p>
+  edit-datatable works!
+</p>
+<div fxFlexAlign="center start" fxLayout="column">
+    <div class="card" fxFlexAlign="center">
+        <div fxLayout="column" class="header">
+          <div class="title">
+            <mat-card-title>Update Book</mat-card-title>
+          </div>
+        </div>
+        <form [formGroup]="formAddBook" (ngSubmit)="onSubmit()" >
+          <div fxLayout="column" fxLayoutGap="5px">
+  
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>Book Id</mat-label>
+                <input matInput name="bookId" formControlName="bookid" [(ngModel)]="tempdata.bookid" [readonly]='true'>
+              </mat-form-field>
+             
+            </div>
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>_id</mat-label>
+                <input matInput name="_id" formControlName="_id" [(ngModel)]="tempdata._id" [readonly]='true'>
+              </mat-form-field>
+             
+            </div>
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>Book Name</mat-label>
+                <input matInput name="name" [(ngModel)]="tempdata.name" formControlName="name" required>
+                <mat-hint>
+                  <div class="errorMessage" *ngIf="getFormErrors.name.touched && getFormErrors.name.invalid">
+                    <small *ngIf="getFormErrors.name.errors?.required">This is required</small>
+                    <small *ngIf="getFormErrors.name.errors?.minlength">Minimum length 3 or higher</small>
+                </div>
+                </mat-hint>
+              </mat-form-field>
+             
+            </div>
+  
+            <div fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>Author Name</mat-label>
+                <input matInput name="authorName" formControlName="author" [(ngModel)]="tempdata.author" required>
+                <mat-hint>
+                  <div class="errorMessage" *ngIf="getFormErrors.author.touched && getFormErrors.author.invalid">
+                    <small *ngIf="getFormErrors.author.errors?.required">This is required</small>
+                    <small *ngIf="getFormErrors.author.errors?.minlength">Minimum length 3 or higher</small>
+                </div>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+  
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="5px">
+              <div fxFlex="49">
+                <mat-form-field appearance="outline">
+                  <mat-label>Price</mat-label>
+                  <input matInput name="price" type="number" formControlName="price" [(ngModel)]="tempdata.price" required>
+                  <mat-hint>
+                    <div class="errorMessage" *ngIf="getFormErrors.price.touched && getFormErrors.price.invalid">
+                      <small *ngIf="getFormErrors.price.errors?.required">This is required</small>
+                      <small *ngIf="getFormErrors.price.errors?.min">Price should be greater than 0</small>
+                  </div>
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+              <div fxFlex="50">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Choose a date</mat-label>
+                      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date" [(ngModel)]="tempdata.date" required>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-hint>
+                          <div class="errorMessage" *ngIf="getFormErrors.date.touched && getFormErrors.date.invalid">
+                            <small *ngIf="getFormErrors.date.errors?.required">This is required</small>
+                        </div>
+                        </mat-hint>
+                    </mat-form-field>
+              </div>
+              </div>
+  
+              <div fxFlex="100">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Image Url</mat-label>
+                    <input matInput name="imageurl" formControlName="imageurl" [(ngModel)]="tempdata.imageurl" required>
+                    
+                    <mat-hint>
+                      <div class="errorMessage" *ngIf="getFormErrors.imageurl.touched && getFormErrors.imageurl.invalid">
+                        <small *ngIf="getFormErrors.imageurl.errors?.required">This is required</small>
+                        <small *ngIf="getFormErrors.imageurl.errors?.pattern">Enter correct pattern</small>
+                    </div>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+          </div>
+  
+          <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+            <div>
+                <button mat-raised-button type="button" mat-dialog-close="yes">Cancel</button>
+            </div>
+            <div>
+                <button mat-flat-button [disabled]="formAddBook.invalid" type="submit" (click)="onSubmit()" color="primary">Update</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>

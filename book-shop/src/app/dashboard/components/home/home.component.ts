@@ -1,7 +1,7 @@
-import { CommonDataService } from './../../services/common-data.service';
-import { CartService } from '../../services/cart.service';
+import { CommonDataService } from './../../../services/common-data.service';
+import { CartService } from './../../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { defaultConstant } from './../../config/constants/default.constant';
+import { defaultConstant } from './../../../config/constants/default.constant';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   getBooks(){
-    // this.books = this._commonDataService.getData(this.storeKey);
     this._commonDataService.getAllBooks().subscribe(res=>{
       this.books = res;
     })
@@ -53,3 +52,4 @@ export class HomeComponent implements OnInit {
   }
 
 }
+

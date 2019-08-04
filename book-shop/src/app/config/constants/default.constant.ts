@@ -2,9 +2,12 @@ export const defaultConstant = {
     Keys: {
         StoreKey: 'mystore',
         CartKey: 'mycart',
-        QuantityKey: 'quatity'
+        QuantityKey: 'quatity',
     },
     Date: {
         CurrentDate: new Date()
+    },
+    User: {
+        Jwt: 'userToken'
     }
 }

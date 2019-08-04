@@ -1,21 +1,20 @@
-import { EditDatatableComponent } from './edit-datatable.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AppLoginDefaultComponent } from './app-login-default.component';
 
-
-describe('EditDatatableComponent', () => {
-  let component: EditDatatableComponent;
-  let fixture: ComponentFixture<EditDatatableComponent>;
+describe('AppLoginDefaultComponent', () => {
+  let component: AppLoginDefaultComponent;
+  let fixture: ComponentFixture<AppLoginDefaultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditDatatableComponent ]
+      declarations: [ AppLoginDefaultComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditDatatableComponent);
+    fixture = TestBed.createComponent(AppLoginDefaultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

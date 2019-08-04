@@ -1,16 +1,15 @@
 import { CommonDataService } from 'src/app/services/common-data.service';
-import { Page } from './../../model/page';
 import { Component, OnInit, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { AddBookComponent } from '../add-book/add-book.component';
-import { ServerResultsService } from '../../services/serverResults.service'
-import { BookModel } from './../../model/book-model';
+import { ServerResultsService } from './../../../services/serverResults.service'
+import { BookModel } from './../../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
 import { ManagementService } from 'src/app/services/management.service';
 import { cloneDeep } from 'lodash';
-import { EditDatatableComponent } from '../edit-datatable/edit-datatable.component';
+import { EditDatatableComponent } from './../../../management/components/edit-datatable/edit-datatable.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Page } from './../../../model/page';
 @Component({
   selector: 'app-book-management',
   templateUrl: './book-management.component.html',
@@ -18,7 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class BookManagementComponent implements OnInit {
 
-  page = new Page();
+  page = new Page;
   rows = new Array<BookModel>();
   temp = new Array<BookModel>();
   public storeKey = defaultConstant.Keys.StoreKey;

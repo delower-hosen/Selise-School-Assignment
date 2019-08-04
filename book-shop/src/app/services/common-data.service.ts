@@ -1,6 +1,5 @@
 import { BookModel } from './../model/book-model';
 import { Injectable } from '@angular/core';
-import { debug } from 'util';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,7 +27,12 @@ export class CommonDataService {
 
   postBook(newbook: BookModel): Observable<any>{
     debugger;
-    return this._http.post<any>(this.baseURL, newbook);
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    const headers = new HttpHeaders()
+    .set('x-authentication-token', token)
+    .set('Content-Type', 'application/json');
+
+    return this._http.post<any>(this.baseURL, newbook, { headers: headers});
   }
 
   getAllBooks(): Observable<any>{
@@ -43,5 +47,10 @@ export class CommonDataService {
   updateBook(newbook: any): Observable<any> {
     let url = 'http://localhost:3000/api/books/' + newbook._id;
     return this._http.put<any>(url, newbook);
+  }
+
+  loginUser(user: any): Observable<any> {
+    let url = 'http://localhost:3000/api/login';
+    return this._http.post(url, user);
   }
 }
