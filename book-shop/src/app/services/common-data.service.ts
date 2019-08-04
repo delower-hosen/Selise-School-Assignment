@@ -53,4 +53,13 @@ export class CommonDataService {
     let url = 'http://localhost:3000/api/login';
     return this._http.post(url, user);
   }
+
+  getCurrentUser(): Observable<any> {
+    let url = 'http://localhost:3000/api/users/me';
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    const headers = new HttpHeaders()
+    .set('x-authentication-token', token)
+    .set('Content-Type', 'application/json');
+    return this._http.get<any>(url, { headers: headers});
+  }
 }

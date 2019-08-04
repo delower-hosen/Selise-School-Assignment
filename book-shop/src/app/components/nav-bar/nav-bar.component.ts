@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   public x: number;
   public cartKey = defaultConstant.Keys.CartKey;
   public selectedTab: string;
+  public loggedIn: boolean = false;
 
   constructor(
     private _cartService: CartService,
@@ -26,6 +27,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    this.isLoggedIn();
     this._cartService.getCartDeleteEmitter().subscribe(deletedbooks=>{
       this.deleteBooks(deletedbooks);
     });
@@ -49,6 +51,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   selectTab(tab: any){
     this.selectedTab = tab;
+  }
+
+  isLoggedIn(){
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    if(token){
+      this.loggedIn = true;
+    }
   }
 
   ngOnDestroy() {

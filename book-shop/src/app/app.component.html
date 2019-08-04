@@ -1,6 +1,26 @@
 <mat-toolbar color="primary">
   <button (click)="sidenav.toggle()"><mat-icon class="mat-18" color="accent">menu</mat-icon></button>
-  <span class="title">Book Shop</span>
+  <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="80">
+        <span class="title">Book Shop</span>
+      </div>
+      <div *ngIf="!loggedIn" fxFlex="2">
+        <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Log in</button>
+      </div>
+      <div *ngIf="!loggedIn" fxFlex="8">
+        <button mat-button>Sign Up</button>
+      </div>
+      <div *ngIf="loggedIn" fxFlex="17">
+        <mat-form-field>
+          <mat-label>{{currentUser.name}}</mat-label>
+          <mat-select>
+            <!-- <mat-option>None</mat-option> -->
+            <mat-option>{{currentUser.name}}</mat-option>
+            <mat-option [routerLink]="['/home']" routerLinkActive="router-link-active"  (click)="onLogOut()">Log out</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  </div>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container" autosize>

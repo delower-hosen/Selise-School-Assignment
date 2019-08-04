@@ -27,12 +27,12 @@ export class AppLoginDefaultComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
     let user = this.loginForm.value;
     console.log(user);
     this._commonDataService.loginUser(user).subscribe(res=>{
       if(res){
         localStorage.setItem('accessToken', JSON.stringify(res));
+        this._router.navigate(['/home']);
       }
     });
   }
