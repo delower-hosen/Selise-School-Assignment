@@ -1,11 +1,11 @@
-import { CommonDataService } from 'src/app/services/common-data.service';
+import { CommonDataService } from 'src/app/shared-services/common-data.service';
 import { Component, OnInit, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { ServerResultsService } from './../../../services/serverResults.service'
+import { ServerResultsService } from '../../../shared-services/serverResults.service'
 import { BookModel } from './../../../model/book-model';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
-import { ManagementService } from 'src/app/services/management.service';
+import { ManagementService } from 'src/app/shared-services/management.service';
 import { cloneDeep } from 'lodash';
 import { EditDatatableComponent } from './../../../management/components/edit-datatable/edit-datatable.component';
 import { Router, ActivatedRoute } from '@angular/router';

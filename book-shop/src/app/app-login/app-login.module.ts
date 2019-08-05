@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { AppLoginRoutingModule } from './app-login-routing.module';
 import { AppLoginDefaultComponent } from './components/app-login-default/app-login-default.component';
-import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppSigninDefaultComponent } from './components/app-signin-default/app-signin-default.component';
+import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
 
 @NgModule({
-  declarations: [AppLoginDefaultComponent],
+  declarations: [AppLoginDefaultComponent, AppSigninDefaultComponent, AppRegistrationComponent],
   imports: [
     CommonModule,
     AppLoginRoutingModule,
@@ -17,7 +19,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatTabsModule,
+    MatCheckboxModule
   ]
 })
 export class AppLoginModule { }

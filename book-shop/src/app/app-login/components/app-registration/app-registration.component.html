@@ -1,0 +1,52 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+    <div fxLayout="column" fxLayoutGap="5px">
+
+      <div fxFlex="100">
+        <mat-form-field appearance="outline">
+          <mat-label>name</mat-label>
+          <input matInput name="name" formControlName="name" required>
+          <mat-hint>
+            <div class="errorMessage" *ngIf="getFormErrors.name.touched && getFormErrors.name.invalid">
+              <small *ngIf="getFormErrors.name.errors?.required">This is required</small>
+              <small *ngIf="getFormErrors.name.errors?.minlength">Minimum length 3 or higher</small>
+          </div>
+          </mat-hint>
+        </mat-form-field>
+       
+      </div>
+      <div fxFlex="100">
+        <mat-form-field appearance="outline">
+          <mat-label>email</mat-label>
+          <input matInput name="email" formControlName="email" required>
+          <mat-hint>
+            <div class="errorMessage" *ngIf="getFormErrors.email.touched && getFormErrors.email.invalid">
+              <small *ngIf="getFormErrors.email.errors?.required">This is required</small>
+              <small *ngIf="getFormErrors.email.errors?.email">Invalid email</small>
+              <small *ngIf="getFormErrors.email.errors?.minlength">Minimum length 3 or higher</small>
+          </div>
+          </mat-hint>
+        </mat-form-field>
+       
+      </div>
+
+      <div fxFlex="100">
+        <mat-form-field appearance="outline">
+          <mat-label>password</mat-label>
+          <input matInput type="password" name="password" formControlName="password" required>
+          <mat-hint>
+            <div class="errorMessage" *ngIf="getFormErrors.password.touched && getFormErrors.password.invalid">
+              <small *ngIf="getFormErrors.password.errors?.required">This is required</small>
+              <small *ngIf="getFormErrors.password.errors?.minlength">Minimum length 5 or higher</small>
+          </div>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+      <div fxFlex="100">
+          <button fxFlex="40" mat-flat-button [disabled]="loginForm.invalid" routerLinkActive="router-link-active"  type="submit" color="primary">Register</button>
+      </div>
+    </div>
+  </form>

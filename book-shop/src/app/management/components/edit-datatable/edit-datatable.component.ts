@@ -3,8 +3,8 @@ import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/cor
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { cloneDeep } from 'lodash';
 import { defaultConstant } from 'src/app/config/constants/default.constant';
-import { ManagementService } from 'src/app/services/management.service';
-import { CommonDataService } from 'src/app/services/common-data.service';
+import { ManagementService } from 'src/app/shared-services/management.service';
+import { CommonDataService } from 'src/app/shared-services/common-data.service';
 import { log } from 'util';
 
 @Component({

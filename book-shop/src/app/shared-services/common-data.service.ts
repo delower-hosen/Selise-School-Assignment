@@ -1,4 +1,4 @@
-import { BookModel } from './../model/book-model';
+import { BookModel } from '../model/book-model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -47,6 +47,11 @@ export class CommonDataService {
   updateBook(newbook: any): Observable<any> {
     let url = 'http://localhost:3000/api/books/' + newbook._id;
     return this._http.put<any>(url, newbook);
+  }
+
+  registerUser(user: any): Observable<any> {
+    let url = 'http://localhost:3000/api/users';
+    return this._http.post<any>(url, user);
   }
 
   loginUser(user: any): Observable<any> {

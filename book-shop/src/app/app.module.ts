@@ -1,4 +1,4 @@
-import { ServerResultsService } from './services/serverResults.service';
+import { ServerResultsService } from './shared-services/serverResults.service';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatSnackBarModule, MatNativeDateModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatSnackBarModule, MatNativeDateModule, MatMenuModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -54,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     FormsModule,
     HttpClientModule,
+    MatMenuModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
     ])

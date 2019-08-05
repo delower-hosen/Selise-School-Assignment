@@ -1,6 +1,6 @@
+import { CommonLogService } from './shared-services/common-log.service';
 import { Component } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import { CommonDataService } from './services/common-data.service';
+import { CommonDataService } from './shared-services/common-data.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,22 @@ export class AppComponent {
   title = 'Book-Shop';
   public loggedIn: boolean = false;
   public currentUser = {};
-  // mode = new FormControl('over');
+  public imageurl: string;
+  
   constructor(
-    private _commonDataService: CommonDataService
+    private _commonDataService: CommonDataService,
+    private _commonLogService: CommonLogService
   ){}
   ngOnInit(): void {
     this.isLoggedIn();
+    this.imageurl = require('./../assets/porfile/user.jpg');
+    this._commonLogService.getLogChangeEvent().subscribe(res=>{
+      if(res){
+        setTimeout(() => {
+          this.loggedIn = true;
+        }, 1000);
+      }
+    })
   }
   
   isLoggedIn(){
@@ -34,6 +44,7 @@ export class AppComponent {
   onLogOut(){
     localStorage.removeItem('accessToken');
     this.loggedIn = false;
+    this._commonLogService.emitLogChangeEvent(0);
   }
 
 }

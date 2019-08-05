@@ -1,22 +1,27 @@
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { CommonDataService } from './../../../services/common-data.service';
+import { CommonDataService } from '../../../shared-services/common-data.service';
+import { CommonLogService } from 'src/app/shared-services/common-log.service';
 
 @Component({
-  selector: 'app-app-login-default',
+  selector: 'app-login-default',
   templateUrl: './app-login-default.component.html',
   styleUrls: ['./app-login-default.component.scss']
 })
 export class AppLoginDefaultComponent implements OnInit {
   public loginForm: FormGroup;
+  public coverPhoto: string;
+
   constructor(
     private _commonDataService: CommonDataService,
-    private _router: Router
+    private _router: Router,
+    private _commonLogService: CommonLogService
   ) { }
 
   ngOnInit() {
     this.intitForm();
+    this.coverPhoto = require('./../../../../assets/porfile/cover.jpg');
   }
 
   intitForm(){
@@ -31,6 +36,7 @@ export class AppLoginDefaultComponent implements OnInit {
     console.log(user);
     this._commonDataService.loginUser(user).subscribe(res=>{
       if(res){
+        this._commonLogService.emitLogChangeEvent(1);
         localStorage.setItem('accessToken', JSON.stringify(res));
         this._router.navigate(['/home']);
       }

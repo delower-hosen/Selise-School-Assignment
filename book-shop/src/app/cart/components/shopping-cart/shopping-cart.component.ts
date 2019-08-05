@@ -1,8 +1,8 @@
-import { CartService } from './../../../services/cart.service';
+import { CartService } from '../../../shared-services/cart.service';
 import { defaultConstant } from './../../../config/constants/default.constant';
-import { ManagementService } from 'src/app/services/management.service';
+import { ManagementService } from 'src/app/shared-services/management.service';
 import { Component, OnInit } from '@angular/core';
-import { CommonDataService } from 'src/app/services/common-data.service';
+import { CommonDataService } from 'src/app/shared-services/common-data.service';
 
 @Component({
   selector: 'app-shopping-cart',

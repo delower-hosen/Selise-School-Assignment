@@ -1,5 +1,5 @@
-import { CommonDataService } from './../../../services/common-data.service';
-import { CartService } from './../../../services/cart.service';
+import { CommonDataService } from '../../../shared-services/common-data.service';
+import { CartService } from '../../../shared-services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { defaultConstant } from './../../../config/constants/default.constant';
 @Component({
