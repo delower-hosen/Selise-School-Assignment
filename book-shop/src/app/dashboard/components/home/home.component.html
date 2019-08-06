@@ -10,10 +10,17 @@
 
       <div fxLayout="column">
         <span class="price">Tk. {{book.price}}</span>
-        <button class="ss" *ngIf="!getQuantity(book.bookid)" fxFlexAlign="end" mat-flat-button color="primary" (click)="addToCart(book)">Add To Cart</button>
-        <div fxFlex="100" *ngIf="getQuantity(book.bookid)" fxLayout="row" fxFlexAlign="space-around">
-          <button mat-flat-button color="primary">-</button>
-          <button mat-flat-button color="primary">+</button>
+        <button class="ss" *ngIf="!getQuantity(book.bookid)" fxFlexAlign="end" mat-flat-button color="warn" (click)="addToCart(book, 1)">Add To Cart</button>
+        <div *ngIf="getQuantity(book.bookid)" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
+            <button mat-flat-button color="warn" (click)="addToCart(book, -1)">-</button>
+          </div>
+          <div color="warn" >
+            <p>{{getQuantity(book.bookid)}} item(s) in cart</p>
+          </div>
+          <div>
+            <button mat-flat-button color="warn" (click)="addToCart(book, 1)">+</button>
+          </div>
         </div>
       </div>
       

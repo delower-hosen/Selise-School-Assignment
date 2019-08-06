@@ -41,6 +41,12 @@ export class ShoppingCartComponent implements OnInit {
 
   getBooks(){
     this.books = this._commonDataService.getData(this.cartKey);
+    for(let index = 0; index < this.books.length; index++){
+      if(this.books[index].quantity==0){
+        this.books.splice(index,1);
+      }
+    }
+    this._commonDataService.setData(this.cartKey, this.books);
   }
   removeBook(book){
     let cart: Array<any> = [];

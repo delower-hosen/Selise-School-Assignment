@@ -41,7 +41,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     this.numberOfBooks = this.getQuantity();
 
-    this._cartService.getNavChangeEmitter().pipe(takeUntil(this._unsubscribeAll)).subscribe(totalPurchase => 
+    this._cartService.getNavChangeEmitter().subscribe(totalPurchase => 
       this.numberOfBooks = this.getQuantity());
   }
 
@@ -51,9 +51,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   getQuantity(){
     let cart: Array<any> = [];
+    let len = 0;
     cart = this._commonDataService.getData(this.cartKey);
     cart = cart? cart : [];
-    return cart.length;
+    for(let c of cart){
+      if(c.quantity) len++;
+    }
+    return len;
   }
 
   selectTab(tab: any){

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  addToCart(book: any){
+  addToCart(book: any, quan: number){
     this.bookItems = 0;
     let previousBooks: Array<any> = this._commonDataService.getData(this.cartKey);
     let doesExist: boolean = false;
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     for(let previousbook of previousBooks){
       if(previousbook.bookid == book.bookid){
         doesExist = true;
-        previousbook.quantity++;
+        previousbook.quantity += quan;
         this._commonDataService.setData(this.cartKey, previousBooks);
       }
       this.bookItems += previousbook.quantity;
@@ -47,14 +47,15 @@ export class HomeComponent implements OnInit {
       book.quantity = 1;
       this._commonDataService.setData(this.cartKey, previousBooks);
       this.bookItems += book.quantity;
-      this._cartService.emitNavChangeEvent(this.bookItems);
+      // this._cartService.emitNavChangeEvent(this.bookItems);
     }
+    this._cartService.emitNavChangeEvent(this.bookItems);
   }
 
-  getQuantity(bookid): boolean{
+  getQuantity(bookid): number{
     let books: Array<any> = this._commonDataService.getData(this.cartKey);
     for(let book of books){
-      if(book.bookid == bookid) return true;
+      if(book.bookid == bookid) return book.quantity;
     }
   }
 
