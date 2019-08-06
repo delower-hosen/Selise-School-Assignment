@@ -51,5 +51,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getQuantity(bookid): boolean{
+    let books: Array<any> = this._commonDataService.getData(this.cartKey);
+    for(let book of books){
+      if(book.bookid == bookid) return true;
+    }
+  }
+
 }
 

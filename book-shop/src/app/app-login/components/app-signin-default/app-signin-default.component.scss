@@ -1,11 +1,7 @@
 :host() {
-    .card {
-      width: 500px;
-      float: center;
-      padding: 0px 0 0 0 !important;
-      margin-top: 40px;
-    }
-  
+  .card{
+    height: 100px;
+  }
     .mat-form-field {
       width: 100%;
     }
@@ -22,7 +18,7 @@
     }
   
     img{
-        height: 127%;
+        height: 105%;
         width: 100%;
     }
     .coverphoto{
@@ -33,9 +29,11 @@
     } 
     .log{
       padding-top: 30px;
+      height: 742px;
     }
     .noAccount{
       padding-top: 30px;
+      // font-family: "Comic Sans MS", cursive, sans-serif;
       p{
         font: italic;
         font-size: 20px;
@@ -44,6 +42,8 @@
         font-size: 24px;
         padding-left: 5px;
         text-decoration: none;
+        color: blue;
+        cursor: pointer;
       }
     }
   }

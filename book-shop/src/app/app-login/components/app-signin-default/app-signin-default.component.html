@@ -1,27 +1,27 @@
-<div fxFlex="100" fxFlexAlign="start" fxLayoutGap="20px" fxLayout="row">
-    <div fxFlex="70" class="coverphoto">
-     <img src="{{coverPhoto}}" alt="ffff">
+<div fxFlex="100" class="loginPage" fxFlexAlign="start" fxLayout="row">
+    <div fxFlex="75" class="coverphoto">
+     <img class="bg" src="{{coverPhoto}}" alt="ffff">
     </div>
     
-     <div fxFlex="28" class="card" fxFlexAlign="start">
-        <mat-card class="">
-            <div  fxLayout="row" class="mb-20 nav">
+     <div fxFlex="25" class="card" fxFlexAlign="start">
+        <mat-card>
+            <div fxLayout="row" class="mb-20 nav">
               <mat-tab-group (selectedTabChange)="updateSelectedMenu($event)" [selectedIndex]="selectedMenuIndex"> 
                 <mat-tab label="Login"></mat-tab>
                 <mat-tab label="Registration"></mat-tab>
               </mat-tab-group>
             </div> 
       
-            <div class="log" *ngIf="selectedStettingMenu=='login'">
+            <div class="log" *ngIf="selectedMenuIndex==0">
               <app-login-default></app-login-default>
               <div class="noAccount" fxLayout="row wrap" fxLayoutAlign="space-around center">
-                  <p>Don't have an account?<a href="#">Register Now!</a></p>
+                <p>Don't have an account?<a (click)="updateSelectedIndex(1)">Register Now!</a></p>
               </div>
             </div>
-            <div class="log" *ngIf="selectedStettingMenu=='registration'">
+            <div class="log" *ngIf="selectedMenuIndex==1">
               <app-registration></app-registration>
               <div class="noAccount" fxLayout="row wrap" fxLayoutAlign="space-around center">
-                  <p>Already have an account?<a href="#">Login Now!</a></p>
+                  <p>Already have an account?<a (click)="updateSelectedIndex(0)">Login Now!</a></p>
               </div>
             </div>
           </mat-card>

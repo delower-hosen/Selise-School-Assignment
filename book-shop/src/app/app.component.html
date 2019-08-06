@@ -1,5 +1,5 @@
-<mat-toolbar color="primary">
-  <button *ngIf="loggedIn" (click)="sidenav.toggle()">
+<mat-toolbar *ngIf="loggedIn" color="primary">
+  <button  (click)="sidenav.toggle()">
     <mat-icon class="mat-18" color="accent">menu</mat-icon>
   </button>
   <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">

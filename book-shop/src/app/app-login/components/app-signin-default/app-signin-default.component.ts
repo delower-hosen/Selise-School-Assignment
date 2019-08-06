@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppSigninDefaultComponent implements OnInit {
   public coverPhoto: string;
   public selectedStettingMenu: string = 'login';
+  public selectedMenuIndex = 0;
   constructor() { }
 
   ngOnInit() {
@@ -15,8 +16,13 @@ export class AppSigninDefaultComponent implements OnInit {
   }
 
   updateSelectedMenu(event) {
-    if (event.index == 0) this.selectedStettingMenu = 'login';
-    else if (event.index == 1) this.selectedStettingMenu = 'registration';
-    console.log(this.selectedStettingMenu);
+    // if (event.index == 0) this.selectedStettingMenu = 'login';
+    // else if (event.index == 1) this.selectedStettingMenu = 'registration';
+    if(event.index == 0) this.selectedMenuIndex = 0;
+    else if(event.index == 1) this.selectedMenuIndex = 1;
+  }
+
+  updateSelectedIndex(index: number){
+    this.selectedMenuIndex = index;
   }
 }

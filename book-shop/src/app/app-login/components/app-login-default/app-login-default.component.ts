@@ -1,3 +1,4 @@
+import { AuthService } from './../../../shared-services/auth/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -12,16 +13,21 @@ import { CommonLogService } from 'src/app/shared-services/common-log.service';
 export class AppLoginDefaultComponent implements OnInit {
   public loginForm: FormGroup;
   public coverPhoto: string;
+  public wrongEmailPassword: boolean = false;
 
   constructor(
     private _commonDataService: CommonDataService,
     private _router: Router,
-    private _commonLogService: CommonLogService
+    private _commonLogService: CommonLogService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
     this.intitForm();
     this.coverPhoto = require('./../../../../assets/porfile/cover.jpg');
+    if(this._authService.isAuthenticated()){
+      this._router.navigate(['/home']);
+    }
   }
 
   intitForm(){
@@ -32,10 +38,15 @@ export class AppLoginDefaultComponent implements OnInit {
   }
 
   onSubmit(){
+    debugger;
     let user = this.loginForm.value;
     console.log(user);
     this._commonDataService.loginUser(user).subscribe(res=>{
-      if(res){
+      if(res.isInvalid){
+        this.wrongEmailPassword = true;
+        this.intitForm();
+      }
+      else if(!res.isInvalid){
         this._commonLogService.emitLogChangeEvent(1);
         localStorage.setItem('accessToken', JSON.stringify(res));
         this._router.navigate(['/home']);

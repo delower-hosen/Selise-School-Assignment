@@ -29,20 +29,27 @@
       </mat-form-field>
     </div>
 
+    <mat-hint>
+      <div class="errorMessage inValidLogin" *ngIf="wrongEmailPassword">
+        <small>Invalid emai or password</small>
+      </div>
+    </mat-hint>
+
+
     <div class="remember" fxFlex="100" fxLayout="row" fxFlexAlign="space-between">
       <div fxFlex="50">
-          <mat-checkbox>Remember me</mat-checkbox>
+        <mat-checkbox>Remember me</mat-checkbox>
       </div>
       <div fxFlex="20"></div>
-        <a href="#">Forgot Password?</a>
+      <a href="#">Forgot Password?</a>
     </div>
 
   </div>
 
   <div fxLayout="row wrap" fxLayoutAlign="space-between start">
     <div fxFlex="100">
-      <button fxFlex="40" mat-flat-button [disabled]="loginForm.invalid" routerLinkActive="router-link-active" type="submit"
-        color="primary">Log in</button>
+      <button fxFlex="40" mat-flat-button [disabled]="loginForm.invalid" routerLinkActive="router-link-active"
+        type="submit" color="primary">Log in</button>
     </div>
   </div>
 

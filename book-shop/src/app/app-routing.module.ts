@@ -1,8 +1,14 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService as AuthGuard  } from './shared-services/auth/auth-guard.service';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     loadChildren: './app-login/app-login.module#AppLoginModule'
@@ -23,9 +29,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    path: '404',
+    component: NotFoundComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '/404',
   }
 ];
 

@@ -20,11 +20,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    NotFoundComponent
   ],
   entryComponents: [
   ],

@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div fxLayout="column" fxLayoutGap="5px">
 
       <div fxFlex="100">
@@ -20,14 +20,18 @@
           <input matInput name="email" formControlName="email" required>
           <mat-hint>
             <div class="errorMessage" *ngIf="getFormErrors.email.touched && getFormErrors.email.invalid">
-              <small *ngIf="getFormErrors.email.errors?.required">This is required</small>
-              <small *ngIf="getFormErrors.email.errors?.email">Invalid email</small>
-              <small *ngIf="getFormErrors.email.errors?.minlength">Minimum length 3 or higher</small>
+              <small *ngIf="getFormErrors.email.errors?.required">This is required.</small>
+              <small *ngIf="getFormErrors.email.errors?.email">Invalid email. </small>
+              <small *ngIf="getFormErrors.email.errors?.minlength">Minimum length 3 or higher.</small>
           </div>
           </mat-hint>
         </mat-form-field>
-       
       </div>
+      <mat-hint>
+        <div class="errorMessage duplicateMessage" *ngIf="duplicateEmail">
+          <small>Email has already been taken!</small>
+      </div>
+      </mat-hint>
 
       <div fxFlex="100">
         <mat-form-field appearance="outline">
@@ -42,11 +46,17 @@
         </mat-form-field>
       </div>
 
+      <div class="terms" fxFlex="100" fxLayout="row" fxFlexAlign="space-between">
+        <div fxFlex="50">
+            <mat-checkbox (change)="checked()">I agree to the <a href="">terms of use</a> and <a href="">privacy policy</a> </mat-checkbox>
+        </div>
+      </div>
+
     </div>
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between start">
       <div fxFlex="100">
-          <button fxFlex="40" mat-flat-button [disabled]="loginForm.invalid" routerLinkActive="router-link-active"  type="submit" color="primary">Register</button>
+          <button fxFlex="40" mat-flat-button [disabled]="loginForm.invalid || !isChecked" routerLinkActive="router-link-active"  type="submit" color="primary">Register</button>
       </div>
     </div>
   </form>
