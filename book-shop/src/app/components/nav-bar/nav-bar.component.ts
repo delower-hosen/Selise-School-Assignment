@@ -55,7 +55,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     cart = this._commonDataService.getData(this.cartKey);
     cart = cart? cart : [];
     for(let c of cart){
-      if(c.quantity) len++;
+      if(c && c.quantity) len++;
     }
     return len;
   }

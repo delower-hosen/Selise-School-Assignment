@@ -11,8 +11,10 @@ import { CommonDataService } from 'src/app/shared-services/common-data.service';
 })
 export class ShoppingCartComponent implements OnInit {
   public books: Array<any> = [];
+  public booksLength: number = 0;
   public cartKey = defaultConstant.Keys.CartKey;
   public storeKey = defaultConstant.Keys.StoreKey;
+  public isNegative: boolean = false;
   constructor(
     private _cartService: CartService,
     private _commonDataService: CommonDataService,
@@ -41,12 +43,15 @@ export class ShoppingCartComponent implements OnInit {
 
   getBooks(){
     this.books = this._commonDataService.getData(this.cartKey);
-    for(let index = 0; index < this.books.length; index++){
-      if(this.books[index].quantity==0){
+    this.booksLength = this.books.length? this.books.length : 0;
+    for(let index = 0; index < this.booksLength; index++){
+      if(this.books[index].quantity<=0){
         this.books.splice(index,1);
       }
     }
-    this._commonDataService.setData(this.cartKey, this.books);
+    this.booksLength = this.books.length? this.books.length : 0;
+    if(!this.booksLength) localStorage.removeItem(this.cartKey);
+    else   this._commonDataService.setData(this.cartKey, this.books);
   }
   removeBook(book){
     let cart: Array<any> = [];
@@ -64,6 +69,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   changeQuantityBy(book:any, updatedQuantityBy:number){
+    if(updatedQuantityBy==1) this.isNegative = false;
     if(book.quantity >= 1){
       let cart: Array<any> = [];
       let updatedQuantity = 0;
@@ -82,7 +88,11 @@ export class ShoppingCartComponent implements OnInit {
       this._cartService.emitChangeOfCartQuantity(updatedQuantityBy);
       }
       else{
-        alert('Enter a positive number or discard the product');
+        // alert('Enter a positive number or discard the product');
+        this.isNegative = true;
+        setTimeout(() => {
+          this.isNegative = false;
+        }, 5000);
       }
     }
   }

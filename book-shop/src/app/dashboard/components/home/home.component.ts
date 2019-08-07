@@ -32,15 +32,21 @@ export class HomeComponent implements OnInit {
   addToCart(book: any, quan: number){
     this.bookItems = 0;
     let previousBooks: Array<any> = this._commonDataService.getData(this.cartKey);
+    previousBooks = previousBooks? previousBooks : [];
     let doesExist: boolean = false;
     book.isChecked = true;
-    for(let previousbook of previousBooks){
-      if(previousbook.bookid == book.bookid){
+    for(let i = 0; i < previousBooks.length; i++){
+      if(previousBooks[i].bookid == book.bookid){
         doesExist = true;
-        previousbook.quantity += quan;
+        previousBooks[i].quantity += quan;
+
+        if(previousBooks[i].quantity <= 0){
+          this.bookItems += previousBooks[i].quantity;
+          previousBooks.splice(i,1);
+        }
         this._commonDataService.setData(this.cartKey, previousBooks);
       }
-      this.bookItems += previousbook.quantity;
+      // this.bookItems += previousBooks[i].quantity;
     }
     if(!doesExist){
       previousBooks.push(book);

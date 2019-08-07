@@ -1,39 +1,47 @@
 <div class="bookStore" fxFlex="100" fxLayoutGap="10px" fxLayout="row wrap">
 
-    <div fxFlex="65" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex="60" *ngIf="booksLength" fxLayout="column" fxLayoutGap="10px">
   
       <div *ngFor="let book of books">
-        <mat-card>
-          <div fxFlex="100" fxLayout="row">
-            <div class="image" fxFlex="15">
+        <mat-card *ngIf="book.quantity">
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+            <div class="image" fxFlex="8">
               <img src="{{book.imageurl}}" alt="book">
             </div>
-            <div fxFlex="35" class="title" fxFlexAlign="start" fxLayout="column">
+            <div fxFlex="30" class="title" fxFlexAlign="start" fxLayout="column">
               <mat-card-title-group>
                 <mat-card-title>{{book.name}}</mat-card-title>
                 <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
               </mat-card-title-group>
               <mat-card-actions>
-                <mat-icon (click)="removeBook(book)" color="accent" class="mat-18 deleteIcon">delete</mat-icon>
+                <mat-icon (click)="removeBook(book)" color="warn" class="mat-18 deleteIcon">delete</mat-icon>
               </mat-card-actions>
             </div>
-            <div fxFlex="30" fxFlexAlign="space-around" fxLayoutGap="5px" fxLayout="row wrap">
-                <div fxFlex="20">
-                  <button mat-flat-button color="accent" class="cartButton" (click)="changeQuantityBy(book, 1)">+</button>
+            <div fxFlex="20" fxLayout="column">
+              <div fxFlex="60" fxLayoutAlign="space-between center" fxLayout="row wrap">
+                <div>
+                  <button mat-flat-button color="warn" class="cartButton" (click)="changeQuantityBy(book, -1)">-</button>
                 </div>
-                <div fxFlex="50" class="cartQuantity">
-                  {{book.quantity}} of this book in cart
+                <div>
+                  <span>{{book.quantity}} in cart</span>
                 </div>
-                <div fxFlex="20">
-                  <button mat-flat-button color="accent" class="cartButton"
-                    (click)="changeQuantityBy(book, -1)">-</button>
+                <div>
+                  <button mat-flat-button color="warn" class="cartButton"
+                    (click)="changeQuantityBy(book, 1)">+</button>
                 </div>
-            </div>
-            <div fxFlex="22" fxFlexAlign="space-around center" fxLayout="row">
-              <div class="price">
-                <span class="taka">({{book.price}} Tk.) * {{book.quantity}} = {{book.price*book.quantity}} Tk.</span>
               </div>
-              <div></div>
+              <div fxFlex="3">
+                <div  *ngIf="isNegative" class="error">
+                  <mat-hint>
+                    <small>please, be positive or delete this from cart!</small>
+                  </mat-hint>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="12" fxLayout="column">
+              <div fxFlex="60" fxLayoutAlign="space-between center" fxLayout="row wrap">
+                <span class="taka">{{book.price*book.quantity}} Tk.</span>
+              </div>
             </div>
           </div>
         </mat-card>
@@ -42,7 +50,7 @@
     </div>
   
   
-    <div class="checkout" fxFlex="32">
+    <div class="checkout" *ngIf="booksLength" fxFlex="37">
       <mat-card class="checkoutCard">
         <mat-card-title>CheckOut Summery</mat-card-title>
       </mat-card>
