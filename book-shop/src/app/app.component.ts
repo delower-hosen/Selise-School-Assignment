@@ -22,6 +22,7 @@ export class AppComponent {
     this.imageurl = require('./../assets/porfile/user.jpg');
     this._commonLogService.getLogChangeEvent().subscribe(res=>{
       if(res){
+        this.isLoggedIn();
         setTimeout(() => {
           this.loggedIn = true;
         }, 1000);

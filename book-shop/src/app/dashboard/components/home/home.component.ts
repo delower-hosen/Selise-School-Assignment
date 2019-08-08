@@ -46,14 +46,12 @@ export class HomeComponent implements OnInit {
         }
         this._commonDataService.setData(this.cartKey, previousBooks);
       }
-      // this.bookItems += previousBooks[i].quantity;
     }
     if(!doesExist){
       previousBooks.push(book);
       book.quantity = 1;
       this._commonDataService.setData(this.cartKey, previousBooks);
       this.bookItems += book.quantity;
-      // this._cartService.emitNavChangeEvent(this.bookItems);
     }
     this._cartService.emitNavChangeEvent(this.bookItems);
   }
