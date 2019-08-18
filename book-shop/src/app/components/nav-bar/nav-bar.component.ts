@@ -19,6 +19,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   public cartKey = defaultConstant.Keys.CartKey;
   public selectedTab: string;
   public loggedIn: boolean = false;
+  public isUserAdmin;
 
   constructor(
     private _cartService: CartService,
@@ -69,6 +70,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
     if(token){
       this.loggedIn = true;
     }
+    this._commonDataService.getCurrentUser().subscribe(user=>{
+      this.isUserAdmin = user.isAdmin;
+    })
   }
 
   ngOnDestroy() {

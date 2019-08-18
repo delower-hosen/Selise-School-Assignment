@@ -114,7 +114,6 @@ export class BookManagementComponent implements OnInit {
   setPage(pageInfo) {
     this.page.pageNumber = pageInfo.offset;
     this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-      debugger;
       this.page = pagedData['page'];
       this.rows = pagedData['data'];
       this.temp = [...this.rows];

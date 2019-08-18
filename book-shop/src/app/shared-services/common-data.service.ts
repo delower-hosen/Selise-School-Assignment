@@ -26,7 +26,6 @@ export class CommonDataService {
   }
 
   postBook(newbook: BookModel): Observable<any>{
-    debugger;
     let token = JSON.parse(localStorage.getItem('accessToken'));
     const headers = new HttpHeaders()
     .set('x-authentication-token', token)
@@ -36,17 +35,32 @@ export class CommonDataService {
   }
 
   getAllBooks(): Observable<any>{
-    return this._http.get<any>(this.baseURL);
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    const headers = new HttpHeaders()
+    .set('x-authentication-token', token)
+    .set('Content-Type', 'application/json');
+
+    return this._http.get<any>(this.baseURL, { headers: headers});
   }
 
   deleteBook(id: string): Observable<any>{
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    const headers = new HttpHeaders()
+    .set('x-authentication-token', token)
+    .set('Content-Type', 'application/json');
+
     let url = 'http://localhost:3000/api/books/' + id;
-    return this._http.delete<any>(url);
+    return this._http.delete<any>(url, { headers: headers});
   }
 
   updateBook(newbook: any): Observable<any> {
+    let token = JSON.parse(localStorage.getItem('accessToken'));
+    const headers = new HttpHeaders()
+    .set('x-authentication-token', token)
+    .set('Content-Type', 'application/json');
+
     let url = 'http://localhost:3000/api/books/' + newbook._id;
-    return this._http.put<any>(url, newbook);
+    return this._http.put<any>(url, newbook, { headers: headers});
   }
 
   registerUser(user: any): Observable<any> {

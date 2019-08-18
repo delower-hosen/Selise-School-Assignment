@@ -38,7 +38,6 @@ export class AppLoginDefaultComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
     let user = this.loginForm.value;
     console.log(user);
     this._commonDataService.loginUser(user).subscribe(res=>{

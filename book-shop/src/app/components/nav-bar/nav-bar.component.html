@@ -12,7 +12,7 @@
       </span>
     </div>
 
-    <div class="navText" *ngIf="loggedIn" [ngClass]="{'activeTab': (selectedTab=='management')}"  routerLink="/manage-book" (click)="selectTab('management')">
+    <div class="navText" *ngIf="loggedIn && isUserAdmin" [ngClass]="{'activeTab': (selectedTab=='management')}"  routerLink="/manage-book" (click)="selectTab('management')">
       <span>
         <a  color="primary" >Management</a>
       </span>

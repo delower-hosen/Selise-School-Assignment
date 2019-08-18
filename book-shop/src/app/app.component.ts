@@ -35,7 +35,6 @@ export class AppComponent {
     if(token){
       this.loggedIn = true;
       this._commonDataService.getCurrentUser().subscribe(res=>{
-        debugger;
         console.log(res);
         this.currentUser = res;
       });

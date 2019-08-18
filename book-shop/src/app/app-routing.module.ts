@@ -1,3 +1,4 @@
+import { AdminGuardService as AdminGuard } from './shared-services/auth/admin-guard.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,7 +27,7 @@ const routes: Routes = [
   {
     path: 'manage-book',
     loadChildren: './management/management.module#ManagementModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: '404',
