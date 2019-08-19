@@ -8,6 +8,6 @@ export const defaultConstant = {
         CurrentDate: new Date()
     },
     User: {
-        Jwt: 'userToken'
+        AccessToken: 'accessToken'
     }
 }

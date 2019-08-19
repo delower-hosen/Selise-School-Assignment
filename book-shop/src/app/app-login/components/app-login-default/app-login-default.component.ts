@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CommonDataService } from '../../../shared-services/common-data.service';
 import { CommonLogService } from 'src/app/shared-services/common-log.service';
+import { defaultConstant } from 'src/app/config/constants/default.constant';
 
 @Component({
   selector: 'app-login-default',
@@ -14,6 +15,7 @@ export class AppLoginDefaultComponent implements OnInit {
   public loginForm: FormGroup;
   public coverPhoto: string;
   public wrongEmailPassword: boolean = false;
+  public accessToken = defaultConstant.User.AccessToken;
 
   constructor(
     private _commonDataService: CommonDataService,
@@ -47,7 +49,8 @@ export class AppLoginDefaultComponent implements OnInit {
       }
       else if(!res.isInvalid){
         this._commonLogService.emitLogChangeEvent(1);
-        localStorage.setItem('accessToken', JSON.stringify(res));
+        // localStorage.setItem(this.accessToken, JSON.stringify(res));
+        this._commonDataService.setData(this.accessToken, res);
         this._router.navigate(['/home']);
       }
     });

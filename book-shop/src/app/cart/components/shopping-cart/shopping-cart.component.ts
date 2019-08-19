@@ -88,11 +88,11 @@ export class ShoppingCartComponent implements OnInit {
       this._cartService.emitChangeOfCartQuantity(updatedQuantityBy);
       }
       else{
-        // alert('Enter a positive number or discard the product');
-        this.isNegative = true;
-        setTimeout(() => {
-          this.isNegative = false;
-        }, 5000);
+        alert('Enter a positive number or discard the product');
+        // this.isNegative = true;
+        // setTimeout(() => {
+        //   this.isNegative = false;
+        // }, 5000);
       }
     }
   }
